@@ -21,8 +21,6 @@ export class LoginService {
     .timeout(60000)
     .map((res: Response) => res.json())
     .catch((error: Response): any => {
-      console.log('____ error text: ',error.statusText);
-      console.log('____ error status: ',error.status);
       Observable.throw(error);
     });
   }

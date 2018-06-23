@@ -2,3 +2,15 @@
 h1{
     text-align: center;
 }
+.position-right{
+    float: right;
+}
+.line_bolc{
+    margin-top:5px;
+}
+.filed-input input{
+    width:100%;
+}
+.btn_left{
+    float:right;
+}
