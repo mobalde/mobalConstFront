@@ -14,20 +14,26 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './back-office/loggin/login.component';
 import { HomeComponent } from './back-office/home/home.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { BanqueComponent } from './back-office/banque/banque.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    BanqueComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     NgbModule,
-    RouterModule.forRoot([])
+    RouterModule.forRoot([
+          { path: '', component: LoginComponent},
+          { path: 'home', component: HomeComponent},
+          { path: 'banque', component: BanqueComponent}
+    ])
   ],
   providers: [LoginService, SharedService, {provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]

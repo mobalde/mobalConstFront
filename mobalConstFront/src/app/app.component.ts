@@ -4,7 +4,6 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { User } from './back-office/loggin/models/user';
 import { LoginService } from './back-office/loggin/async-services/login.service';
-import { BackOfficeRoutingModule } from './back-office/backOffice-routing.module';
 import {} from '../app/back-office/loggin/async-services/login.service';
 
 @Component({

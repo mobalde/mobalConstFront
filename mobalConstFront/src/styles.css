@@ -14,3 +14,15 @@ h1{
 .btn_left{
     float:right;
 }
+.blocPrincipal button{
+    width: 100%;
+    margin-bottom:15px;
+}
+.blocPrincipal{
+    margin-top:10px;
+}
+.title{
+    margin-left:24%;
+    margin-top:2em;
+    margin-bottom: 1em;
+}
