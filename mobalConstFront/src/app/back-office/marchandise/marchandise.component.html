@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-3 col-xs-3 col-lg-3"></div>
+  <div class="col-md-6 col-xs-4 col-lg-6">
+    <h4 class="title">Gestion Marchandise</h4>
+    <div class="blocPrincipal">
+        <form method="post">
+            <div class="form-row input-field-marchandise">
+              <div class="col">
+                  <span class="titre-champ">Date debut: </span><input type="date" name="dateDebutVente" class="input-generique">
+              </div>
+              <div class="col">
+                  <span class="titre-champ">Date fin: </span><input type="date" name="dateFinVente" class="input-generique">
+              </div>
+            </div>
+            <div class="form-group filed-input">
+              <input type="text" name="nbSacVenduSemaine" class="input-generique" placeholder=" Nombre de sac vendu par semaine">
+            </div>
+            <div class="form-group filed-input">
+              <input type="text" name="nbSacAnterieur" class="input-generique" placeholder=" Nombre de sac anterieur">
+            </div>
+            <div class="form-group filed-input">
+              <input type="text" name="totalSacVendu" class="input-generique" placeholder=" Total sac vendu">
+            </div>
+            <div class="form-group filed-input">
+              <input type="text" name="totalSacMarchandise" class="input-generique" placeholder=" Total sac marchandise">
+            </div>
+            <div class="form-row filed-input">
+              <div class="col">
+                <button type="button" class="btn btn-large btn-success" data-toggle="modal" data-target="#popin">Valider</button>
+              </div>
+              <div class="col">
+                <button type="button" class="btn btn-large btn-warning">Annuler</button>
+              </div>
+            </div>
+        </form>
+    </div>
+  </div>
+  <div class="col-md-2 col-xs-2 col-lg-2">
+      <div class="total">
+          <span>Total: Mettre le ngModel</span>
+      </div>
+  </div>
+  <div class="col-md-1 col-xs-1 col-lg-1"></div>
+</div>
+
+<!-- Modal -->
+<app-popin-confirmation></app-popin-confirmation>

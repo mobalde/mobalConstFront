@@ -15,6 +15,8 @@ import { LoginComponent } from './back-office/loggin/login.component';
 import { HomeComponent } from './back-office/home/home.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { BanqueComponent } from './back-office/banque/banque.component';
+import { MarchandiseComponent } from './back-office/marchandise/marchandise.component';
+import { PopinConfirmationComponent } from './popin/popin-confirmation/popin-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { BanqueComponent } from './back-office/banque/banque.component';
     LoginComponent,
     HomeComponent,
     HeaderComponent,
-    BanqueComponent
+    BanqueComponent,
+    MarchandiseComponent,
+    PopinConfirmationComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +36,8 @@ import { BanqueComponent } from './back-office/banque/banque.component';
     RouterModule.forRoot([
           { path: '', component: LoginComponent},
           { path: 'home', component: HomeComponent},
-          { path: 'banque', component: BanqueComponent}
+          { path: 'banque', component: BanqueComponent},
+          { path: 'marchandise', component: MarchandiseComponent}
     ])
   ],
   providers: [LoginService, SharedService, {provide: APP_BASE_HREF, useValue: '/'}],

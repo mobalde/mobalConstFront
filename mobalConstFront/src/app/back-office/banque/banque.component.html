@@ -5,17 +5,20 @@
       <div class="blocPrincipal">
           <form method="post">
               <div class="form-group filed-input">
-                <input type="date" name="dateDepot" class="dateDepot">
+                <input type="date" name="dateDepot" class="input-generique">
               </div>
               <div class="form-group filed-input">
-                <input type="text" name="argentDepot" class="argentDepot" placeholder=" Montant de l'argent deposé">
+                <input type="text" name="argentDepot" class="input-generique" placeholder=" Montant de l'argent deposé">
               </div>
               <div class="form-group filed-input">
-                <input type="text" name="soldeAnterieur" class="soldeAnterieur" placeholder=" Solde anterieur">
+                <input type="text" name="soldeAnterieur" class="input-generique" placeholder=" Solde anterieur">
+              </div>
+              <div class="form-group filed-input">
+                <input type="text" name="numeroTicketDepot" class="input-generique" placeholder=" Numero ticket de depôt">
               </div>
               <div class="form-row filed-input">
                 <div class="col">
-                  <button type="button" class="btn btn-large btn-success">Valider</button>
+                  <button type="button" class="btn btn-large btn-success" data-toggle="modal" data-target="popin">Valider</button>
                 </div>
                 <div class="col">
                   <button type="button" class="btn btn-large btn-warning">Annuler</button>
