@@ -17,6 +17,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { BanqueComponent } from './back-office/banque/banque.component';
 import { MarchandiseComponent } from './back-office/marchandise/marchandise.component';
 import { PopinConfirmationComponent } from './popin/popin-confirmation/popin-confirmation.component';
+import { BilanCompteComponent } from './back-office/bilan-compte/bilan-compte.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PopinConfirmationComponent } from './popin/popin-confirmation/popin-con
     HeaderComponent,
     BanqueComponent,
     MarchandiseComponent,
-    PopinConfirmationComponent
+    PopinConfirmationComponent,
+    BilanCompteComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import { PopinConfirmationComponent } from './popin/popin-confirmation/popin-con
           { path: '', component: LoginComponent},
           { path: 'home', component: HomeComponent},
           { path: 'banque', component: BanqueComponent},
-          { path: 'marchandise', component: MarchandiseComponent}
+          { path: 'marchandise', component: MarchandiseComponent},
+          { path: 'bilanCompte', component: BilanCompteComponent},
     ])
   ],
   providers: [LoginService, SharedService, {provide: APP_BASE_HREF, useValue: '/'}],
