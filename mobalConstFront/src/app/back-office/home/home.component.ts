@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { RouterModule, Router, ActivatedRoute, Params } from '@angular/router';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  // userName: String = localStorage.getItem('currentUser').indexOf('nom');
+  constructor(private route: ActivatedRoute, private router: Router, private http: Http) { }
 
   ngOnInit() {
+    console.log('---- currentUser: ',localStorage.getItem('currentUser'));
   }
+
 
 }

@@ -1,3 +1,6 @@
+import { AuthService } from './back-office/loggin/guards/auth.service';
+import { AuthGuardService } from './back-office/loggin/guards/auth-guard.service';
+import { UserService } from './back-office/loggin/async-services/user.service';
 import { SharedService } from './shared/shared.service';
 import { LoginService } from './back-office/loggin/async-services/login.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -37,13 +40,13 @@ import { BilanCompteComponent } from './back-office/bilan-compte/bilan-compte.co
     NgbModule,
     RouterModule.forRoot([
           { path: '', component: LoginComponent},
-          { path: 'home', component: HomeComponent},
+          { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
           { path: 'banque', component: BanqueComponent},
           { path: 'marchandise', component: MarchandiseComponent},
           { path: 'bilanCompte', component: BilanCompteComponent},
     ])
   ],
-  providers: [LoginService, SharedService, {provide: APP_BASE_HREF, useValue: '/'}],
+  providers: [LoginService, SharedService, UserService, AuthGuardService, AuthService, {provide: APP_BASE_HREF, useValue: ''}],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -10,6 +10,7 @@ import { SharedService } from '../../../shared/shared.service';
 export class LoginService {
  
   authRequired = true;
+  isloggedIn: boolean = false;
 
   constructor(private sharedService: SharedService, private http: Http, private route: ActivatedRoute, private router: Router) {
   }
@@ -39,4 +40,5 @@ export class LoginService {
             return Observable.of(false);
         }).subscribe();
   }
+
 }
