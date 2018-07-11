@@ -1,40 +1,38 @@
 import { Observable } from 'rxjs';
-import { UserService } from './../async-services/user.service';
 import { Injectable } from '@angular/core';
-import { LoginService } from '../async-services/login.service';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
+
 import { User } from '../models/user';
-import { error } from 'protractor';
+import { SharedService } from '../../../shared/shared.service';
 
 
 @Injectable()
 export class AuthService{
 
+    user : User;
 
-    isloggedIn: boolean;
-    constructor(private loginService: LoginService, private userservice: UserService){
+    constructor(private sharedService: SharedService, private http: Http, private router: Router){
+        this.user = JSON.parse(localStorage.getItem('currentUser'));
     }
 
-    // --- authentification
-    isUserAuthenticated(email: String, password: String): boolean{
-        this.loginService.authentification(email,password).subscribe(
-          data => {
-            this.userservice.user = data;
-            if(this.userservice.user.password === null){
-                this.setUserLoggedIn(true);
-            }
-          }, error => {
-            console.log("---- error server: ");
-          }
-        );
-        return this.isUserLoggedIn();
+    isUserLoggedIn(): Observable<boolean>{
+        this.user = JSON.parse(localStorage.getItem('currentUser'));
+        if(this.user !== null){
+            return this.http.get(this.sharedService.getApi('currentUser/'+this.user.email), this.sharedService.options)
+            .timeout(60000)
+               .map((res: Response) => res.json())
+                .catch((error: Response): any => {
+                Observable.throw(error);
+              });
+        }
     }
 
-
-    isUserLoggedIn(): boolean {
-	    return this.isloggedIn;
+    isLoggerActivate(){
+        if(this.isUserLoggedIn){
+            return true;
+        }
+        return false;
     }
     
-    setUserLoggedIn(islog: boolean){
-        this.isloggedIn = islog;
-    }
 }

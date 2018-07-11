@@ -3,6 +3,9 @@
     <div class="position-left">
       <img src="../../../assets/logo_mobal.png">
     </div>
+    <div>
+      <label *ngIf="this.user !== null">{{this.user.prenom + " " + this.user.nom}}</label>
+    </div>
   </div>
   <div class="col-lg-9 col-md-9 col-xs-9">
     <div class="position-right">

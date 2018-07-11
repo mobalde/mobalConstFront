@@ -28,11 +28,9 @@ export class LoginComponent implements OnInit {
         this.user = data;
         if(this.user.password === null){
             localStorage.setItem('currentUser', JSON.stringify(this.user)); // Sauvegarder l'utilisateur dans la variable de session
-            this.auth.setUserLoggedIn(true);
             this.router.navigate(['home']);
         }
         else{
-          this.auth.setUserLoggedIn(false);
           this.router.navigate(['']);
         }
       }, error => {

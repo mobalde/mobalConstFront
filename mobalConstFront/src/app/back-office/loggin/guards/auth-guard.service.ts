@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 
@@ -8,14 +9,14 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 @Injectable()
 export class AuthGuardService implements CanActivate{
 
+    isLogger: String;
     constructor(private authService: AuthService, private router: Router) {
     }
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        let url: string = state.url;
-        if (this.authService.isUserLoggedIn()) {
-            return true; 
+    canActivate(){
+        if(this.authService.isLoggerActivate()){
+            return true;
         }
-        this.router.navigate(['']);
+        this.router.navigate[''];
         return false;
     }
 }

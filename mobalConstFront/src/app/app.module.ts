@@ -41,9 +41,9 @@ import { BilanCompteComponent } from './back-office/bilan-compte/bilan-compte.co
     RouterModule.forRoot([
           { path: '', component: LoginComponent},
           { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
-          { path: 'banque', component: BanqueComponent},
-          { path: 'marchandise', component: MarchandiseComponent},
-          { path: 'bilanCompte', component: BilanCompteComponent},
+          { path: 'banque', component: BanqueComponent, canActivate: [AuthGuardService]},
+          { path: 'marchandise', component: MarchandiseComponent, canActivate: [AuthGuardService]},
+          { path: 'bilanCompte', component: BilanCompteComponent, canActivate: [AuthGuardService]},
     ])
   ],
   providers: [LoginService, SharedService, UserService, AuthGuardService, AuthService, {provide: APP_BASE_HREF, useValue: ''}],
