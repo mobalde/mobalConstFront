@@ -9,9 +9,7 @@
   </div>
   <div class="col-lg-9 col-md-9 col-xs-9">
     <div class="position-right">
-      <button type="button" class="btn btn-deault">
-        <span class="glyphicon glyphicon-log-out">logout</span>
-      </button>
+      <button *ngIf="this.user !== null" type="button" class="btn btn-deault" (click)="deconnexion()">Deconnexion</button>
     </div>
   </div>
 </div>

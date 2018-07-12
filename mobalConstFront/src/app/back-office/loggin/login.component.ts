@@ -1,5 +1,4 @@
 import { AuthGuardService } from './guards/auth-guard.service';
-import { AuthService } from './guards/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute, Params } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
@@ -17,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   user: User = new User();
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: Http, private auth: AuthService, private loginService: LoginService) { }
+  constructor(private router: Router, private http: Http, private loginService: LoginService) { }
 
   ngOnInit() {
   }
@@ -35,6 +34,7 @@ export class LoginComponent implements OnInit {
         }
       }, error => {
         console.log("---- error server: ");
+        this.router.navigate(['']);
       }
     );
   }

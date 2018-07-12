@@ -26,19 +26,14 @@ export class LoginService {
     });
   }
 
-  // --- Service logout
-  logout() {
-    let url = this.sharedService.getApiLogout();
-     this.http.request(url, this.sharedService.options)
-     .timeout(60000)
-     .map((res: Response) => { res.json();
-         if (res.status === 200) {
-           this.router.navigate(['logout']);
-         }
-      }).catch(() => {
-            this.router.navigate(['logout']);
-            return Observable.of(false);
-        }).subscribe();
-  }
+ // --- Service logout
+ logout(): Observable<boolean> {
+  return this.http.get(this.sharedService.getApi('logout'), this.sharedService.options)
+   .timeout(60000)
+   .map((res: Response) => res.json())
+   .catch((error: Response): any => {
+        Observable.throw(error);
+    });
+}
 
 }

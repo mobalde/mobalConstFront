@@ -1,3 +1,4 @@
+// import { Observable } from 'rxjs/Rx';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
@@ -29,7 +30,7 @@ export class AuthService{
     }
 
     isLoggerActivate(){
-        if(this.isUserLoggedIn){
+        if(this.isUserLoggedIn()){
             return true;
         }
         return false;

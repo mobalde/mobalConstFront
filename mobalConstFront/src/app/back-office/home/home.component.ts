@@ -14,8 +14,20 @@ export class HomeComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private http: Http) { }
 
   ngOnInit() {
-    console.log('---- currentUser: ',this.user);
   }
 
+  navigation(page){
+    switch(page){
+      case 'bilan':
+        this.router.navigate(['bilanCompte']);
+      break;
+      case 'banque':
+        this.router.navigate(['banque']);
+      break;
+      case 'marchandise':
+        this.router.navigate(['marchandise']);
+      break;
+    }
+  }
 
 }
