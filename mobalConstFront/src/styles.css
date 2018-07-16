@@ -1,12 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+.btn-warningue, .btn-primere, .btn-successe{
+    color: #fff;
+}
+.btn-primere{
+    background-color: #0f0c9e;
+}
+.btn-successe{
+    background-color: #0c9e58;
+}
+.btn-warningue{
+    background-color: #9e580c
+}
 h1{
     text-align: center;
 }
 .position-right{
     float: right;
-}
-.line_bolc{
-    margin-top:5px;
 }
 .filed-input input{
     width:100%;
@@ -17,18 +26,48 @@ h1{
 .blocPrincipal button{
     width: 100%;
     margin-bottom:15px;
+    font-size: 18px;
 }
 .blocPrincipal{
     margin-top:10px;
 }
 .title{
-    margin-left:24%;
-    margin-top:0.5em;
+    margin-left:16%;
+    margin-top:1.5em;
     margin-bottom: 1em;
+    color: #0c529e;
 }
 .input-field-bc input{
     width: 11.70em;
 }
 .input-field-bc th{
     text-align: center;
+}
+.contents{
+    background: #f9fcff;
+}
+@media (min-width: 1200px){
+    .contents {
+        height: 624px;
+    }
+    .content-home, .header-content{
+        margin-top: 6em;
+    }
+}
+@media (min-width: 992px){
+    .container {
+        /* a definir */
+    }
+}
+
+@media (min-width: 768px){
+    .container {
+        /* a definir */
+    }
+}
+
+@media (min-width: 576px){
+    .container {
+        /* a definir */
+    }
 }

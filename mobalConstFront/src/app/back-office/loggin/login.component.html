@@ -1,20 +1,20 @@
-<div class="row">
+<div class="row header-content">
   <div class="col-md-4 col-xs-4 col-lg-4"></div>
   <div class="col-md-4 col-xs-4 col-lg-4">
       <div class="title">
-          <h4>
-              Authentification
-          </h4>
+          <h2>Authentification</h2>
       </div>
-      <form method="post">
-          <div class="form-group filed-input">
-              <input type="text" placeholder="Identifiant" style="padding-left:4px" [(ngModel)]='user.email' name='email'>
-          </div>
-          <div class="form-group filed-input">
-              <input type="password" placeholder="Mot de passe" style="padding-left:4px" [(ngModel)]='user.password' name='password'>
-          </div>
-          <button class="btn btn-primary btn_left" (click)='logger()'>Connexion</button>
-      </form>
+      <div class="blocPrincipal">
+        <form method="post">
+            <div class="form-group filed-input">
+                <input type="text" placeholder="Identifiant" [(ngModel)]='user.email' name='email'>
+            </div>
+            <div class="form-group filed-input">
+                <input type="password" placeholder="Mot de passe" [(ngModel)]='user.password' name='password'>
+            </div>
+            <button class="btn btn-large btn_left btn-primere" (click)='logger()'>Connexion</button>
+        </form>
+      </div>
   </div>
   <div class="col-md-4 col-xs-4 col-lg-4"></div>
 </div>

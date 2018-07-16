@@ -1,11 +1,17 @@
 <div class="row">
   <div class="col-lg-1 col-xs-1 col-md-1"></div>
   <div class="col-md-10 col-xs-10 col-lg-10">
-    <h4 class="title">Bilan du compte de la semaine</h4>
+    <h2 class="title">Bilan du compte de la semaine</h2>
     <div class="blocPrincipal">
-      <button class="btn btn-primary" (click)="ajoutLigne()" style="margin-left:5em;width: 21em;">Ajouter</button>
-      <button [disabled]="isActif" [ngClass]="getClass()" (click)="Validation()" style="margin-left:1em;width: 21em;">Valider</button>
       <form method="post">
+        <div class="form-row filed-input">
+          <div class="col">
+              <button class="btn btn-primere" (click)="ajoutLigne()">Ajouter</button>
+          </div>
+          <div class="col">
+              <button [disabled]="isActif" [ngClass]="getClass()" (click)="validation()">Valider</button>
+          </div>
+        </div>
         <div class="form-row">
           <table class="table table-responsive table-striped input-field-bc">
             <thead *ngIf="isAffiche">

@@ -13,10 +13,22 @@ import { User } from './../../back-office/loggin/models/user';
 })
 export class HeaderComponent implements OnInit {
 
-  user: User = JSON.parse(localStorage.getItem('currentUser'));
-  constructor(private router: Router, private loginService: LoginService, sharedService: SharedService) { }
+  headerPage: String = null;
+  user: User;
+
+  constructor(private router: Router, private loginService: LoginService, private sharedService: SharedService) { 
+    this.sharedService.headerPageSubject.subscribe(
+      value => {
+        this.headerPage = value;
+      } 
+    );
+  }
 
   ngOnInit() {
+  }
+
+  ngAfterContentChecked(){
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   deconnexion(){

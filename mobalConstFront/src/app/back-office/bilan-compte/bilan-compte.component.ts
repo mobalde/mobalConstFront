@@ -1,3 +1,5 @@
+import { Http } from '@angular/http';
+import { SharedService } from './../../shared/shared.service';
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 
@@ -11,9 +13,10 @@ export class BilanCompteComponent implements OnInit {
   isAffiche: boolean = false;
   isActif: boolean = true;
 
-  constructor() { }
+  constructor(private sharedService: SharedService, private http: Http) { }
 
   ngOnInit() {
+    this.sharedService.displayHeader('pagebilanCompte');
   }
 
   ajoutLigne(){
@@ -33,7 +36,7 @@ export class BilanCompteComponent implements OnInit {
   }
 
   getClass(){
-    return (this.isActif ? 'btn btn-secondary' : 'btn btn-success');
+    return (this.isActif ? 'btn btn-secondary' : 'btn btn-successe');
   }
 
   validation(){

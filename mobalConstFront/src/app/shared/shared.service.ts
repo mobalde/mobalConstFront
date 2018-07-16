@@ -14,7 +14,14 @@ export class SharedService {
     public options = new RequestOptions({ headers: this.createHeaders(), withCredentials: true});    
     //public optionsForPDF = new RequestOptions({ headers: this.createHeaders(), withCredentials: true, responseType: ResponseContentType.Blob });
 
+    _valeur: String = null;
+
+    headerPageSubject: Subject<String> = new Subject<String>();
+
     constructor(private route: ActivatedRoute, private router: Router) {
+        this.headerPageSubject.subscribe((value) => {
+            this._valeur = value;
+        });
     }
 
     private createHeaders() {
@@ -45,6 +52,10 @@ export class SharedService {
               alert(error._body);
               console.log('Server error : ' + error.status);
         }
+    }
+
+    public displayHeader(nom: String) {
+        this.headerPageSubject.next(nom);
     }
 
 }
