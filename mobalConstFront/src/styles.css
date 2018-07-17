@@ -50,9 +50,12 @@ h1{
     .contents {
         height: 624px;
     }
-    .content-home, .header-content{
-        margin-top: 6em;
+    .container{
+        margin-top: 69px;
     }
+    /*.content-home, .header-content{
+        margin-top: 6em;
+    }*/
 }
 @media (min-width: 992px){
     .container {
