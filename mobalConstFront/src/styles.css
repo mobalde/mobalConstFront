@@ -11,8 +11,12 @@
 .btn-warningue{
     background-color: #9e580c
 }
-h1{
-    text-align: center;
+h1, h2{
+    text-align: center !important;
+}
+.total label, .total span{
+    font-weight: bold;
+    margin-bottom: 1.4rem;
 }
 .position-right{
     float: right;
@@ -32,7 +36,6 @@ h1{
     margin-top:10px;
 }
 .title{
-    margin-left:16%;
     margin-top:1.5em;
     margin-bottom: 1em;
     color: #0c529e;
@@ -43,34 +46,45 @@ h1{
 .input-field-bc th{
     text-align: center;
 }
-.contents{
-    background: #f9fcff;
-}
-@media (min-width: 1200px){
-    .contents {
-        height: 624px;
-    }
+@media (min-width: 993px){
+    /*.contents {
+        max-height: 75%;
+        background: #f9fcff;
+    }*/
     .container{
         margin-top: 69px;
     }
-    /*.content-home, .header-content{
-        margin-top: 6em;
+}
+@media (min-width: 769px) and (max-width: 992px){
+    /*.contents {
+        height: 55rem;
+        background: #f9fcff;
     }*/
-}
-@media (min-width: 992px){
-    .container {
-        /* a definir */
+    .container{
+        margin-top: 69px;
     }
 }
-
-@media (min-width: 768px){
-    .container {
-        /* a definir */
+@media (min-width: 577px) and (max-width: 768px){
+    /*.contents {
+        height: 55rem;
+        background: #f9fcff;
+    }*/
+    .container{
+        margin-top: 69px;
     }
 }
-
-@media (min-width: 576px){
-    .container {
-        /* a definir */
+@media (max-width: 576px){
+    /*.contents {
+        height: 55rem;
+    }*/
+    .container{
+        margin-top: 3.6rem;
+    }
+    h2{
+        font-size: 1.6rem !important;
+    }
+    .total label, .total span{
+        font-size: 1.3rem;
+        color: #9e0c52;
     }
 }
