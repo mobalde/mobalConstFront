@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+.contents {
+    margin-top: 8rem;
+}
 .btn-warningue, .btn-primere, .btn-successe{
     color: #fff;
 }
@@ -36,7 +39,6 @@ h1, h2{
     margin-top:10px;
 }
 .title{
-    margin-top:1.5em;
     margin-bottom: 1em;
     color: #0c529e;
 }
@@ -47,39 +49,12 @@ h1, h2{
     text-align: center;
 }
 @media (min-width: 993px){
-    /*.contents {
-        max-height: 75%;
-        background: #f9fcff;
-    }*/
-    .container{
-        margin-top: 69px;
-    }
 }
 @media (min-width: 769px) and (max-width: 992px){
-    /*.contents {
-        height: 55rem;
-        background: #f9fcff;
-    }*/
-    .container{
-        margin-top: 69px;
-    }
 }
 @media (min-width: 577px) and (max-width: 768px){
-    /*.contents {
-        height: 55rem;
-        background: #f9fcff;
-    }*/
-    .container{
-        margin-top: 69px;
-    }
 }
 @media (max-width: 576px){
-    /*.contents {
-        height: 55rem;
-    }*/
-    .container{
-        margin-top: 3.6rem;
-    }
     h2{
         font-size: 1.6rem !important;
     }
