@@ -16,9 +16,15 @@ export class LoginComponent implements OnInit {
 
   user: User = new User();
 
-  constructor(private router: Router, private http: Http, private loginService: LoginService) { }
+  constructor(private router: Router, private http: Http, private loginService:
+     LoginService) {}
 
   ngOnInit() {
+    let user = JSON.parse(localStorage.getItem('currentUser'));
+    if(this.user !== null){
+      // --- Redirection sur la page Home
+      this.router.navigate(['home']);
+    }
   }
 
   logger(){

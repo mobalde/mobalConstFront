@@ -34,6 +34,6 @@ export class LoginService {
    .catch((error: Response): any => {
         Observable.throw(error);
     });
-}
+ }
 
 }
