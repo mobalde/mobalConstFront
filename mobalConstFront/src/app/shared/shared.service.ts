@@ -18,10 +18,18 @@ export class SharedService {
 
     headerPageSubject: Subject<String> = new Subject<String>();
 
+    errorSubject: Subject<String> = new Subject<String>();
+
     constructor(private route: ActivatedRoute, private router: Router) {
         this.headerPageSubject.subscribe((value) => {
             this._valeur = value;
         });
+
+        this.errorSubject.subscribe(
+            (value) => {
+                this._valeur = value;
+            }
+        );
     }
 
     private createHeaders() {
@@ -56,6 +64,10 @@ export class SharedService {
 
     public displayHeader(nom: String) {
         this.headerPageSubject.next(nom);
+    }
+
+    public displayError(nom: String) {
+        this.errorSubject.next(nom);
     }
 
 }

@@ -1,3 +1,4 @@
+import { SharedService } from './../../shared/shared.service';
 import { AuthGuardService } from './guards/auth-guard.service';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute, Params } from '@angular/router';
@@ -15,12 +16,18 @@ import { User } from '../loggin/models/user';
 export class LoginComponent implements OnInit {
 
   user: User = new User();
+  erreurConnexion: String = null;
 
-  constructor(private router: Router, private http: Http, private loginService:
-     LoginService) {}
+  constructor(private router: Router, private http: Http, private loginService: LoginService,private sharedService: SharedService) {
+       this.sharedService.errorSubject.subscribe(
+         value => {
+           this.erreurConnexion = value;
+         }
+       );
+  }
 
   ngOnInit() {
-    let user = JSON.parse(localStorage.getItem('currentUser'));
+    // let user = JSON.parse(localStorage.getItem('currentUser'));
     if(this.user !== null){
       // --- Redirection sur la page Home
       this.router.navigate(['home']);
@@ -31,16 +38,11 @@ export class LoginComponent implements OnInit {
     this.loginService.authentification(this.user.email,this.user.password).subscribe(
       data => {
         this.user = data;
-        if(this.user.password === null){
-            localStorage.setItem('currentUser', JSON.stringify(this.user)); // Sauvegarder l'utilisateur dans la variable de session
-            this.router.navigate(['home']);
-        }
-        else{
-          this.router.navigate(['']);
-        }
-      }, error => {
-        console.log("---- error server: ");
-        this.router.navigate(['']);
+        localStorage.setItem('currentUser', JSON.stringify(this.user)); // Sauvegarder l'utilisateur dans la variable de session
+        this.router.navigate(['home']);
+      },
+      err => {
+        console.log("____ err: ",err);
       }
     );
   }

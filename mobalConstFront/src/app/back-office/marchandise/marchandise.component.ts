@@ -15,4 +15,8 @@ export class MarchandiseComponent implements OnInit {
     this.sharedService.displayHeader('pageMarchandise');
   }
 
+  valider(){
+    console.log('_____ marchandise: ')
+  }
+
 }

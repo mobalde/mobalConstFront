@@ -11,6 +11,7 @@
             </div>
             <div class="form-group filed-input">
                 <input type="password" placeholder="Mot de passe" [(ngModel)]='user.password' name='password'>
+                <label *ngIf="this.erreurConnexion !== null" class="error">Email ou Mot de passe incorrect</label>
             </div>
             <button class="btn btn-large btn_left btn-primere" (click)='logger()'>Connexion</button>
         </form>

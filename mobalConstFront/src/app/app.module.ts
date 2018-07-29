@@ -20,12 +20,14 @@ import { BanqueComponent } from './back-office/banque/banque.component';
 import { MarchandiseComponent } from './back-office/marchandise/marchandise.component';
 import { PopinConfirmationComponent } from './popin/popin-confirmation/popin-confirmation.component';
 import { BilanCompteComponent } from './back-office/bilan-compte/bilan-compte.component';
+import { ErrorPageComponent } from './back-office/error/error-page.component';
 
 const appRoute: Routes = [
         { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
         { path: 'banque', component: BanqueComponent, canActivate: [AuthGuardService]},
         { path: 'marchandise', component: MarchandiseComponent, canActivate: [AuthGuardService]},
         { path: 'bilanCompte', component: BilanCompteComponent, canActivate: [AuthGuardService]},
+        { path: 'error', redirectTo: ''},
         { path: '', component: LoginComponent },
 ]; 
 
@@ -38,7 +40,8 @@ const appRoute: Routes = [
     BanqueComponent,
     MarchandiseComponent,
     PopinConfirmationComponent,
-    BilanCompteComponent
+    BilanCompteComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,

@@ -20,17 +20,20 @@ export class HomeComponent implements OnInit {
   }
 
   navigation(page){
-    switch(page){
-      case 'bilan':
-        this.router.navigate(['bilanCompte']);
-      break;
-      case 'banque':
-        this.router.navigate(['banque']);
-      break;
-      case 'marchandise':
-        this.router.navigate(['marchandise']);
-      break;
-    }
+    if (this.user !== null) {
+      switch(page){
+        case 'bilan':
+          this.router.navigate(['bilanCompte']);
+        break;
+        case 'banque':
+          this.router.navigate(['banque']);
+        break;
+        case 'marchandise':
+          this.router.navigate(['marchandise']);
+        break;
+      }
+    } 
+    
   }
 
 }

@@ -21,11 +21,8 @@ export class AuthGuardService implements CanActivate{
                     if(res.json() === true){
                        return true;
                     }
-                    else{
-                        this.router.navigate[''];
-                        return false;
-                    }
                 }
+                localStorage.removeItem('currentUser');
                 this.router.navigate[''];
                 return false;
             })

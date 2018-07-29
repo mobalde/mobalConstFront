@@ -6,3 +6,6 @@ input{
     color: #0c529e;
     font-weight: 400;
 }
+.error{
+    color: red;
+}
