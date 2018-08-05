@@ -1,3 +1,5 @@
+import { ProduitsService } from './back-office/produit/async-services/produits.services';
+import { MarchandisesService } from './back-office/marchandise/async-services/marchandises.service';
 import { AuthGuardService } from './back-office/loggin/guards/auth-guard.service';
 import { UserService } from './back-office/loggin/async-services/user.service';
 import { SharedService } from './shared/shared.service';
@@ -18,7 +20,6 @@ import { HomeComponent } from './back-office/home/home.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { BanqueComponent } from './back-office/banque/banque.component';
 import { MarchandiseComponent } from './back-office/marchandise/marchandise.component';
-import { PopinConfirmationComponent } from './popin/popin-confirmation/popin-confirmation.component';
 import { BilanCompteComponent } from './back-office/bilan-compte/bilan-compte.component';
 import { ErrorPageComponent } from './back-office/error/error-page.component';
 
@@ -39,7 +40,6 @@ const appRoute: Routes = [
     HeaderComponent,
     BanqueComponent,
     MarchandiseComponent,
-    PopinConfirmationComponent,
     BilanCompteComponent,
     ErrorPageComponent
   ],
@@ -50,7 +50,7 @@ const appRoute: Routes = [
     NgbModule,
     RouterModule.forRoot(appRoute)
   ],
-  providers: [LoginService, SharedService, UserService, AuthGuardService, {provide: APP_BASE_HREF, useValue: ''}],
+  providers: [LoginService, SharedService, UserService, AuthGuardService, MarchandisesService, ProduitsService, {provide: APP_BASE_HREF, useValue: ''}],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -26,6 +26,7 @@ h1, h2{
 }
 .filed-input input{
     width:100%;
+    padding-left: 5px;
 }
 .btn_left{
     float:right;

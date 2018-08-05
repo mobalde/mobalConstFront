@@ -1,9 +1,10 @@
-export class Marchandise{
+export class Marchandise {
 	dateDebut: Date;
-	dateFin; Date;
+	dateFin: Date;
 	nbSacVendu: Number;
 	nbSacAnterieur: Number;
 	totalSacVendu: Number;
 	totalSacMarchandise: Number;
-	totalMarchandiseRestant: Number;
+	totalSacRestant: Number = 0
+	idProduit: Number;
 }

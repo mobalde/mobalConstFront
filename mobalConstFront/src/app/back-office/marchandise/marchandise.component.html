@@ -6,39 +6,35 @@
         <form method="post">
             <div class="form-row input-field-marchandise">
               <div class="col">
-                  <span class="titre-champ">Date debut: </span><input type="date" name="dateDebutVente" class="input-generique">
+                  <span class="titre-champ">Date debut: </span>
+                  <input type="date" value = "{{marchandise.dateDebut | date: 'yyyy-MM-dd'}}" [(ngModel)]="marchandise.dateDebut" name="dateDebut" class="input-generique dateDebut">
               </div>
               <div class="col">
-                  <span class="titre-champ">Date fin: </span><input type="date" name="dateFinVente" class="input-generique">
+                  <span class="titre-champ">Date fin: </span><input type="date" value = "{{marchandise.dateFin | date: 'yyyy-MM-dd'}}" [(ngModel)]="marchandise.dateFin" name="dateFin" class="input-generique dateFin">
               </div>
             </div>
             <div class="form-group filed-input">
-              <input type="text" name="nbSacVenduSemaine" class="input-generique" placeholder=" Nombre de sac vendu par semaine">
+              <input type="text" name="nbSacVendu" [(ngModel)]="marchandise.nbSacVendu" (keyup)="calculTSacVendu_1($event)" placeholder=" Nombre de sac vendu par semaine" class="input-generique nbsacvendu">
             </div>
             <div class="form-group filed-input">
-              <input type="text" name="nbSacAnterieur" class="input-generique" placeholder=" Nombre de sac anterieur">
+              <input [disabled]="true" type="text" name="nbSacAnterieur" [(ngModel)]="marchandise.nbSacAnterieur" class="input-generique" placeholder=" Nombre de sac anterieur vendu">
             </div>
             <div class="form-group filed-input">
-              <input type="text" name="totalSacVendu" class="input-generique" placeholder=" Total sac vendu">
+              <input [disabled]="true" type="text" name="totalSacVendu" [(ngModel)]="marchandise.totalSacVendu" class="input-generique" placeholder=" Total sac vendu">
             </div>
             <div class="form-group filed-input">
-              <input type="text" name="totalSacMarchandise" class="input-generique" placeholder=" Total sac marchandise">
+              <input [disabled]="true" type="text" name="totalSacMarchandise" [(ngModel)]="marchandise.totalSacMarchandise" class="input-generique" placeholder=" Total sac marchandise">
             </div>
             <div class="form-row filed-input total">
               <div class="col">
                 <label>Total</label>
               </div>
               <div class="col">
-                <span>Mettre le ngModel</span>
+                <span>{{marchandise.totalSacRestant}}</span>
               </div>
             </div>
             <div class="form-row filed-input">
-              <div class="col">
-                <button type="button" class="btn btn-large btn-successe" data-toggle="modal" data-target="#popin">Valider</button>
-              </div>
-              <div class="col">
-                <button type="button" class="btn btn-large btn-warningue">Annuler</button>
-              </div>
+              <button type="button" class="btn btn-large btn-successe" data-toggle="modal" data-target="#popin">Valider</button>
             </div>
         </form>
     </div>
@@ -47,4 +43,25 @@
 </div>
 
 <!-- Modal -->
-<app-popin-confirmation></app-popin-confirmation>
+<div class="modal fade" id="popin" role="dialog" tableindex="-1" aria-labelledby="popinModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="contenu">
+            <label>Voulez-vous sauvegarder vos données ?</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-large" (click)="valider()">Oui</button>
+          <button type="button" class="btn btn-primary btn-large" data-dismiss="modal" aria-label="close"
+          >Non</button>
+        </div>
+      </div>
+    </div>
+  </div>
