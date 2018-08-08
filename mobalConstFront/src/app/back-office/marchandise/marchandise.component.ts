@@ -17,6 +17,8 @@ export class MarchandiseComponent implements OnInit {
 
   marchandise: Marchandise = new Marchandise();
 
+  afficheInfo: boolean = false;
+
 
   constructor(private sharedService: SharedService, private produitService: ProduitsService, private http: Http, private marchandiseService: MarchandisesService) { }
 
@@ -52,7 +54,8 @@ export class MarchandiseComponent implements OnInit {
       $(".nbsacvendu").css('border', '1px solid #808080ad');
       this.marchandiseService.postMarchandise(this.marchandise).subscribe(
         data => {
-          this.marchandise = new Marchandise();
+          this.marchandise = data;
+          this.afficheInfo = true;
         }, err => {
           console.log("_____ error: ",err);
         }

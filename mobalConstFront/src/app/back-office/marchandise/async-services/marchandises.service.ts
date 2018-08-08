@@ -13,7 +13,7 @@ export class MarchandisesService{
     }
 
     // servie ajout marchandise
-    postMarchandise(marchandise: Marchandise): Observable<boolean>{
+    postMarchandise(marchandise: Marchandise): Observable<Marchandise>{
         const data = JSON.stringify(marchandise);
         return this.http.post(this.sharedService.getApi('ajout/marchandise'), data,  this.sharedService.options)
         .timeout(60000)
