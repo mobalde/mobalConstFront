@@ -1,6 +1,5 @@
 export class Vendu{
-    dateDebut: Date;
-	dateFin: Date;
+    dateVente: Date;
 	quantite: Number;
 	prixUnitaire: Number;
 	total: Number;

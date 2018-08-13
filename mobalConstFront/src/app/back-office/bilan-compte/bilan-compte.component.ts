@@ -1,4 +1,4 @@
-import { ListVendu } from './models/list-vendus';
+import { Vendu } from './models/vendu';
 import { Http } from '@angular/http';
 import { SharedService } from './../../shared/shared.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +11,7 @@ import * as $ from 'jquery';
 })
 export class BilanCompteComponent implements OnInit {
 
-  listeVente: ListVendu[];
+  listeVente: Array<Vendu> = [];
 
   isAffiche: boolean = false;
   isActif: boolean = true;
@@ -22,14 +22,18 @@ export class BilanCompteComponent implements OnInit {
     this.sharedService.displayHeader('pagebilanCompte');
   }
 
+  calculTotal(event, element: String){
+    console.log('event: ',event);
+  }
+
   ajoutLigne(){
     $('.tableBody').append(
       '<tr>'+
       '<td></td>'+
-      '<td><input type="Date" name="dateVente" class="input-field" [(ngModel)]="'+this.listeVente['vendu'].dateDebut+'" (keyup)="calculTotal($event)"></td>'+
-      '<td><input type="text" name="quantite" class="input-field" [(ngModel)]="'+this.listeVente['vendu'].quantite+'" (keyup)="calculTotal($event)"></td>'+
-      '<td><input type="text" class="input-field" [(ngModel)]="'+this.listeVente['vendu'].prixUnitaire+'" (keyup)="calculTotal($event)"></td>'+
-      '<td class="input-field"><input type="text" [disabled]="true" class="input-field" [(ngModel)]="'+this.listeVente['vendu'].total+'" value="'+this.listeVente['vendu'].total+'"></td>'+
+      '<td><input type="Date" name="dateVente" class="input-field dateVente"></td>'+
+      '<td><input type="text" name="quantite" class="input-field quantite"></td>'+
+      '<td><input type="text" name="prixUnitaire" class="input-field prxUnitaire"></td>'+
+      '<td class="input-field"><input type="text" name="total" disabled=disabled class="input-field total"></td>'+
       '</tr>'
     );
     if(!this.isAffiche){
@@ -42,12 +46,8 @@ export class BilanCompteComponent implements OnInit {
     return (this.isActif ? 'btn btn-secondary' : 'btn btn-successe');
   }
 
-  calculTotal(event){
-    
-  }
-
   validation(){
-
+    console.log("_______ list: ",this.listeVente);
   }
 
   suppressionLigne(){
