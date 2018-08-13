@@ -17,9 +17,6 @@ export class MarchandiseComponent implements OnInit {
 
   marchandise: Marchandise = new Marchandise();
 
-  afficheInfo: boolean = false;
-
-
   constructor(private sharedService: SharedService, private produitService: ProduitsService, private http: Http, private marchandiseService: MarchandisesService) { }
 
   ngOnInit() {
@@ -55,7 +52,7 @@ export class MarchandiseComponent implements OnInit {
       this.marchandiseService.postMarchandise(this.marchandise).subscribe(
         data => {
           this.marchandise = data;
-          this.afficheInfo = true;
+          this.sharedService.afficheAlerte('alert-success', 'class');
         }, err => {
           console.log("_____ error: ",err);
         }

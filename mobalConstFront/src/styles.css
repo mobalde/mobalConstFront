@@ -1,4 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+.bloc-contenu{
+    border: 1px solid #80808029;
+    padding: 26px 30px 27px 30px
+}
+.modal label{
+    margin-left: 25%;
+}
 .contents {
     margin-top: 8rem;
 }

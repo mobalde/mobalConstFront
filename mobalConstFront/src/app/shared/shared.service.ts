@@ -7,6 +7,8 @@ import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+import * as $ from 'jquery';
+
 @Injectable()
 export class SharedService {
     private _apiPrefixUrl = 'http://localhost:8080'; // url prefix
@@ -68,6 +70,23 @@ export class SharedService {
 
     public displayError(nom: String) {
         this.errorSubject.next(nom);
+    }
+
+    public afficheAlerte(bloc: String, type: String){
+        switch(type){
+            case 'class':
+                $('.'+bloc).fadeIn(1000);
+                    setTimeout(function() { 
+                        $('.'+bloc).fadeOut(500); 
+                    }, 5000);
+            break;
+            case 'id':
+                $('#'+bloc).fadeIn(1000);
+                    setTimeout(function() { 
+                        $('#'+bloc).fadeOut(500); 
+                    }, 5000);
+            break;
+        }
     }
 
 }
