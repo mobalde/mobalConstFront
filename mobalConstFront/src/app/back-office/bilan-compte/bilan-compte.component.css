@@ -1,0 +1,14 @@
+.modal-body table{
+    width: 100%;
+}
+.modal-body table .libeller{
+    text-align: center;
+}
+.input-field{
+    margin-bottom: 5px;
+    width: 95%;
+    margin-right: 5rem;
+}
+.input-field-bc{
+    width: 100%;
+}

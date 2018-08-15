@@ -6,14 +6,14 @@
       <form method="post">
         <div class="form-row filed-input">
           <div class="col">
-              <button class="btn btn-primere" (click)="ajoutLigne()">Ajouter</button>
+              <button class="btn btn-primere" (click)="openPopin()">Ajouter</button>
           </div>
           <div class="col">
-              <button [disabled]="isActif" [ngClass]="getClass()" (click)="validation()">Valider</button>
+              <button [disabled]="isActif" [ngClass]="getClass()" data-toggle="modal" data-target="#popin">Valider</button>
           </div>
         </div>
         <div class="form-row">
-          <table class="table table-responsive table-striped input-field-bc">
+          <table class="table table-striped input-field-bc">
             <thead *ngIf="isAffiche">
               <tr>
                 <th>Action</th>
@@ -36,7 +36,43 @@
   <div class="col-lg-1 col-md-1 col-xl-1"></div>
 </div>
 
-<!-- Modal -->
+<!-- Modal ajout vente -->
+<div class="modal fade" id="popinAjout" role="dialog" tableindex="-1" aria-labelledby="popinModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Ajouter un nouveau bilan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class=" row modal-body">
+          <div class="col-12 col-md-12 col-sm-12 col-lg-12 col-xl-12">
+            <table>
+              <tr>
+                  <td class="libeller">Date vente* :</td>
+                  <td><input type="Date" name="dateVente" class="input-field dateVente"></td>
+              </tr>
+              <tr>
+                  <td class="libeller">Quantite* : </td>
+                  <td><input type="text" name="quantite" class="input-field quantite"></td>
+              </tr>
+              <tr>
+                  <td class="libeller">Prix unitaire* :</td>
+                  <td><input type="text" name="prixUnitaire" class="input-field prxUnitaire"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn-large" data-dismiss="modal" aria-label="close">Annuler</button>
+          <button type="button" class="btn btn-success btn-large" (click)="add()">Valider</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal Confirmation -->
 <div class="modal fade" id="popin" role="dialog" tableindex="-1" aria-labelledby="popinModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -52,9 +88,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-large btn-successe" data-toggle="modal" data-target="#popin">Oui</button>
-          <button type="button" class="btn btn-primary btn-large" data-dismiss="modal" aria-label="close"
-          >Non</button>
+            <button type="button" class="btn btn-primary btn-large" (click)="valider()">Oui</button>
+            <button type="button" class="btn btn-primary btn-large" data-dismiss="modal" aria-label="close">Non</button>
         </div>
       </div>
     </div>

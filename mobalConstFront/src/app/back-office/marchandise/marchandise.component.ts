@@ -5,7 +5,6 @@ import { Marchandise } from './models/marchandise';
 import { Http } from '@angular/http';
 import { SharedService } from './../../shared/shared.service';
 import { Component, OnInit } from '@angular/core';
-// import * as $ from 'jquery';
 import {} from 'ngx-bootstrap';
 
 @Component({
