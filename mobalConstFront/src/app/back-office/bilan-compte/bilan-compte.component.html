@@ -6,10 +6,10 @@
       <form method="post">
         <div class="form-row filed-input">
           <div class="col">
-              <button class="btn btn-primere" (click)="openPopin()">Ajouter</button>
+              <button class="btn btn-primere" (click)="openPopin('A')">Ajouter</button>
           </div>
           <div class="col">
-              <button [disabled]="isActif" [ngClass]="getClass()" data-toggle="modal" data-target="#popin">Valider</button>
+              <button [disabled]="isActif" [ngClass]="getClass()" (click)="openPopin('V')">Valider</button>
           </div>
         </div>
         <div class="form-row">
@@ -23,7 +23,16 @@
                 <th>Total</th>
               </tr>
             </thead>
-            <tbody class="tableBody"></tbody>
+            <tbody class="tableBody" *ngIf="this.listeVente.length > 0">
+              <tr *ngFor="let vendu of this.listeVente; let i = index">
+                <td style="text-align: center; cursor:pointer;">
+                  <img src="../../../assets/remove-icone.png" width="30" height="30" title="supprimer" (click)="supprimer(i, vendu)"></td>
+                <td style="text-align: center;"><label>{{vendu.dateVente | date: 'dd/MM/yyyy'}}</label></td>
+                <td style="text-align: center;"><label>{{vendu.quantite}}</label></td>
+                <td style="text-align: center;"><label>{{vendu.prixUnitaire}}</label></td>
+                <td style="text-align: center;"><label>{{vendu.total}}</label></td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </form>
@@ -42,9 +51,6 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Ajouter un nouveau bilan</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
         <div class=" row modal-body">
           <div class="col-12 col-md-12 col-sm-12 col-lg-12 col-xl-12">
@@ -72,24 +78,21 @@
     </div>
   </div>
 
-<!-- Modal Confirmation -->
+<!-- Modal Confirmation enregistrement et suppression -->
 <div class="modal fade" id="popin" role="dialog" tableindex="-1" aria-labelledby="popinModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Confirmation</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
         <div class="modal-body">
           <div class="contenu">
-            <label>Voulez-vous sauvegarder vos données ?</label>
+            <label>{{this.message}}</label>
           </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary btn-large" (click)="valider()">Oui</button>
-            <button type="button" class="btn btn-primary btn-large" data-dismiss="modal" aria-label="close">Non</button>
+            <button type="button" class="btn btn-danger btn-large" data-dismiss="modal" aria-label="close">Non</button>
+            <button type="button" class="btn btn-success btn-large" (click)="valider()">Oui</button>
         </div>
       </div>
     </div>

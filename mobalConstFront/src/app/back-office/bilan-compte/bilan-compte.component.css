@@ -12,3 +12,9 @@
 .input-field-bc{
     width: 100%;
 }
+.tableBody tr td{
+    text-align:center;
+}
+.modal-title{
+    margin: 0 auto;
+}

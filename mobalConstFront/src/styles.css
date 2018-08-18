@@ -6,6 +6,10 @@
 .modal label{
     margin-left: 25%;
 }
+.modal-title{
+    margin: 0 auto;
+    color: blue;
+}
 .contents {
     margin-top: 8rem;
 }
@@ -13,7 +17,7 @@
     color: #fff;
 }
 .btn-primere{
-    background-color: #0f0c9e;
+    background-color: #0c529e;
 }
 .btn-successe{
     background-color: #0c9e58;

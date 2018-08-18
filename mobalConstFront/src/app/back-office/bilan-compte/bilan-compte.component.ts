@@ -3,7 +3,7 @@ import { ProduitsService } from './../produit/async-services/produits.services';
 import { Vendu } from './models/vendu';
 import { Http } from '@angular/http';
 import { SharedService } from './../../shared/shared.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
 
 declare var $: any;
 
@@ -14,13 +14,18 @@ declare var $: any;
 })
 export class BilanCompteComponent implements OnInit {
 
+  @ViewChild('tableBody') el:ElementRef;
+
   produit: Produit;
   listeVente: Array<Vendu> = [];
 
   isAffiche: boolean = false;
   isActif: boolean = true;
 
-  constructor(private sharedService: SharedService, private produitService: ProduitsService, private http: Http) { }
+  message: String = null;
+  elementPop: Number;
+
+  constructor(private rd: Renderer2, private sharedService: SharedService, private produitService: ProduitsService, private http: Http) { }
 
   ngOnInit() {
     this.sharedService.displayHeader('pagebilanCompte');
@@ -31,8 +36,14 @@ export class BilanCompteComponent implements OnInit {
     console.log('event: ',event);
   }
 
-  openPopin(){
-    $("#popinAjout").modal("show");
+  openPopin(elements: String){
+    if(elements === 'A'){
+      $("#popinAjout").modal("show");
+    }
+    if(elements === 'V'){
+      this.message = "Voulez-vous sauvegarder vos données ?"
+      $("#popin").modal("show");
+    }
   }
 
   add(){
@@ -57,15 +68,13 @@ export class BilanCompteComponent implements OnInit {
       vendu.total = $('.prxUnitaire').val()*$('.quantite').val();
       vendu.idProduit = this.produit.id;
       this.listeVente.push(vendu);
-      $('.tableBody').append(
-        '<tr>'+
-        '<td></td>'+
-        '<td style="text-align: center;"><label>'+vendu.dateVente+'</label></td>'+
-        '<td style="text-align: center;"><label>'+vendu.quantite+'</label></td>'+
-        '<td style="text-align: center;"><label>'+vendu.prixUnitaire+'</label></td>'+
-        '<td style="text-align: center;"><label>'+vendu.total+'</label></td></td>'+
-        '</tr>'
-      );
+  }
+
+  supprimer(elements: Number, vendu: Vendu){
+    this.elementPop = elements;
+    var date = new Date(vendu.dateVente);
+    this.message = "Voulez-vous supprimer le bilan du "+new Intl.DateTimeFormat("en-GB").format(date)+" ?";
+    $("#popin").modal("show");
   }
 
   colorEmptyInput(){
@@ -89,7 +98,7 @@ export class BilanCompteComponent implements OnInit {
     return (this.isActif ? 'btn btn-secondary' : 'btn btn-successe');
   }
 
-  validation(){
+  valider(){
     console.log("_______ list: ",this.listeVente);
   }
 
