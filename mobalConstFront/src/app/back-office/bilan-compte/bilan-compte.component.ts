@@ -1,3 +1,4 @@
+import { BilancompteService } from './async-services/bilancomptes.service';
 import { Produit } from './../produit/models/produit';
 import { ProduitsService } from './../produit/async-services/produits.services';
 import { Vendu } from './models/vendu';
@@ -25,15 +26,13 @@ export class BilanCompteComponent implements OnInit {
   message: String = null;
   elementPop: Number;
 
-  constructor(private rd: Renderer2, private sharedService: SharedService, private produitService: ProduitsService, private http: Http) { }
+  venteASupp: Vendu = null;
+
+  constructor(private bilancompteService: BilancompteService, private sharedService: SharedService, private produitService: ProduitsService, private http: Http) { }
 
   ngOnInit() {
     this.sharedService.displayHeader('pagebilanCompte');
     this.getMarchandise('ciment');
-  }
-
-  calculTotal(event, element: String){
-    console.log('event: ',event);
   }
 
   openPopin(elements: String){
@@ -72,6 +71,7 @@ export class BilanCompteComponent implements OnInit {
 
   supprimer(elements: Number, vendu: Vendu){
     this.elementPop = elements;
+    this.venteASupp = vendu;
     var date = new Date(vendu.dateVente);
     this.message = "Voulez-vous supprimer le bilan du "+new Intl.DateTimeFormat("en-GB").format(date)+" ?";
     $("#popin").modal("show");
@@ -99,6 +99,17 @@ export class BilanCompteComponent implements OnInit {
   }
 
   valider(){
+    if(this.venteASupp !== null){
+      this.listeVente = this.listeVente.filter(obj => obj !== this.venteASupp);
+    } else {
+      // Ajout listeVente
+      this.bilancompteService.postListeVente(this.listeVente).subscribe(
+        data => {
+        }
+      );
+    }
+    $('#popin').modal('toggle');
+    this.venteASupp = null;
     console.log("_______ list: ",this.listeVente);
   }
 
