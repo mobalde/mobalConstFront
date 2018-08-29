@@ -13,6 +13,7 @@ export class AuthGuardService implements CanActivate{
     constructor(private router: Router, private http: Http, private sharedService: SharedService) {
     }
     canActivate (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>{
+        this.timeOut();
         let user = JSON.parse(localStorage.getItem('currentUser'));
         if(user !== null){
             return this.http.get(this.sharedService.getApi('currentUser/'+user.email), this.sharedService.options)
@@ -30,6 +31,17 @@ export class AuthGuardService implements CanActivate{
         else{
             this.router.navigate[''];
             return Observable.of(false);
+        }
+    }
+
+    timeOut(){
+        var dateTimes = new Date();
+        var sec = Math.floor(dateTimes.getTime()/1000);
+        sec = sec % 60;
+        var sec1 = parseInt(localStorage.getItem('temps'));
+        var diff = sec1 - sec;
+        if(!isNaN(diff) && diff > 1800){
+            return false;
         }
     }
 }

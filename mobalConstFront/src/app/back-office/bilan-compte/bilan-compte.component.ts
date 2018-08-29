@@ -105,6 +105,8 @@ export class BilanCompteComponent implements OnInit {
       // Ajout listeVente
       this.bilancompteService.postListeVente(this.listeVente).subscribe(
         data => {
+          this.listeVente = [];
+          this.sharedService.afficheAlerte('alert-success', 'class');
         }
       );
     }

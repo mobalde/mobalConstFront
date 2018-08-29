@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    // let user = JSON.parse(localStorage.getItem('currentUser'));
     if(this.user !== null){
       // --- Redirection sur la page Home
       this.router.navigate(['home']);
@@ -39,6 +38,9 @@ export class LoginComponent implements OnInit {
       data => {
         this.user = data;
         localStorage.setItem('currentUser', JSON.stringify(this.user)); // Sauvegarder l'utilisateur dans la variable de session
+        var datetimes = new Date();
+        var sec = Math.floor(datetimes.getTime()/1000);
+        localStorage.setItem('temps',JSON.stringify(sec % 60)); 
         this.router.navigate(['home']);
       },
       err => {

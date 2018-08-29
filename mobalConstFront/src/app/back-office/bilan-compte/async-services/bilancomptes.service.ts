@@ -12,7 +12,6 @@ export class BilancompteService{
     }
 
     postListeVente(listVente: Array<Vendu>): Observable<boolean>{
-        console.log('______ service');
         const data = JSON.stringify(listVente);
         return this.http.post(this.sharedService.getApi('add'), data,  this.sharedService.options)
         .timeout(60000)
