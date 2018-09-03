@@ -1,3 +1,5 @@
+//import { Observable } from 'rxjs/Rx';
+import { LoginService } from './../async-services/login.service';
 import { SharedService } from './../../../shared/shared.service';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -10,9 +12,9 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 export class AuthGuardService implements CanActivate{
 
     
-    constructor(private router: Router, private http: Http, private sharedService: SharedService) {
+    constructor(private router: Router, private http: Http, private sharedService: SharedService, private loginService: LoginService) {
     }
-    canActivate (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>{
+    canActivate (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         this.timeOut();
         let user = JSON.parse(localStorage.getItem('currentUser'));
         if(user !== null){
@@ -23,10 +25,12 @@ export class AuthGuardService implements CanActivate{
                        return true;
                     }
                 }
-                localStorage.removeItem('currentUser');
                 this.router.navigate[''];
                 return false;
-            })
+            }).catch(() => {
+                this.router.navigate[''];
+                return Observable.of(false);
+              });
         }
         else{
             this.router.navigate[''];
@@ -34,14 +38,30 @@ export class AuthGuardService implements CanActivate{
         }
     }
 
+    // Si aucune activité sur l'appli pendant 30mn, se deconnecter
     timeOut(){
         var dateTimes = new Date();
-        var sec = Math.floor(dateTimes.getTime()/1000);
-        sec = sec % 60;
-        var sec1 = parseInt(localStorage.getItem('temps'));
-        var diff = sec1 - sec;
-        if(!isNaN(diff) && diff > 1800){
+        var timesNow = dateTimes.getTime();
+        var dates1 = parseInt(localStorage.getItem('temps'));
+        var diff = timesNow - dates1;
+        var sec = Math.floor(diff/1000); // Nombre de seconde entre les 2 dates
+        if(!isNaN(sec) && sec > 1200){
+            localStorage.removeItem('temps');
+            this.loginService.logout().subscribe(
+                data => {
+                    if(localStorage.getItem('currentUser') !== null){
+                      localStorage.removeItem('currentUser');
+                    }
+                    this.router.navigate(['']);
+                }, error => {
+                  this.router.navigate(['']);
+                }
+            );
             return false;
+        }
+        else {
+            localStorage.removeItem('temps');
+            localStorage.setItem('temps',JSON.stringify(timesNow));
         }
     }
 }
