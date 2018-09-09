@@ -1,3 +1,4 @@
+import { VenduInBanque } from './models/vendu-in-banque';
 import { ProduitsService } from './../produit/async-services/produits.services';
 import { Produit } from './../produit/models/produit';
 import { Http } from '@angular/http';
@@ -11,20 +12,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BanqueComponent implements OnInit {
 
+  venduInBanque: Array<VenduInBanque> = [];
   produit: Produit[];
   constructor(private sharedService: SharedService, private http: Http, private produitService: ProduitsService) { }
 
   ngOnInit() {
     this.sharedService.displayHeader('pageBanque');
-    this.getAllProduit();
+    
   }
 
-  getAllProduit(){
-    this.produitService.getAllProduit().subscribe(
-      data => {
-        this.produit = data;
-      }
-    );
+  getListDeVenteNonComptabiliser(){
+     
   }
-
 }
