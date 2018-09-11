@@ -1,3 +1,4 @@
+import { BanqueService } from './back-office/banque/async-services/banque.services';
 import { BilancompteService } from './back-office/bilan-compte/async-services/bilancomptes.service';
 import { ProduitsService } from './back-office/produit/async-services/produits.services';
 import { MarchandisesService } from './back-office/marchandise/async-services/marchandises.service';
@@ -51,7 +52,7 @@ const appRoute: Routes = [
     NgbModule,
     RouterModule.forRoot(appRoute)
   ],
-  providers: [BilancompteService, LoginService, SharedService, UserService, AuthGuardService, MarchandisesService, ProduitsService, {provide: APP_BASE_HREF, useValue: ''}],
+  providers: [BilancompteService, LoginService, SharedService, UserService, AuthGuardService, MarchandisesService, ProduitsService, BanqueService, {provide: APP_BASE_HREF, useValue: ''}],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

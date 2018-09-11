@@ -36,4 +36,16 @@ export class ProduitsService {
           });
     }
 
+    getAllProduit(): Observable<Produit[]>{
+      return this.http.get(this.sharedService.getApi('produit/all'), this.sharedService.options)
+      .timeout(60000)
+      .map((res: Response) => res.json())
+      .catch((error: Response | any): any => {
+        if(error.status === 403){
+          this.sharedService.displayError('errorConnexion');
+          Observable.throw(error);
+        }
+      });
+    }
+
 }
