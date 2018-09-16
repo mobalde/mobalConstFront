@@ -6,14 +6,18 @@
       </div>
       <div class="blocPrincipal">
         <form method="post">
-            <div class="form-group filed-input">
-                <input type="text" placeholder="Identifiant" [(ngModel)]='user.email' name='email'>
+            <div class="form-group">
+                <label for="email" class="label-generique">Email:</label>
+                <input class="form-control" type="text" [(ngModel)]='user.email' id="email" name='email'>
             </div>
-            <div class="form-group filed-input">
-                <input type="password" placeholder="Mot de passe" [(ngModel)]='user.password' name='password'>
+            <div class="form-group">
+                <label for="password" class="label-generique">Mot de mot passe:</label>
+                <input class="form-control" type="password" [(ngModel)]='user.password' name='password' id="password">
                 <label *ngIf="this.erreurConnexion !== null" class="error">Email ou Mot de passe incorrect</label>
             </div>
-            <button class="btn btn-large btn_left btn-primere" (click)='logger()'>Connexion</button>
+            <div class="form-row">
+                <button class="btn btn-primere"  (click)='logger()' >Connexion</button>
+            </div>
         </form>
       </div>
   </div>

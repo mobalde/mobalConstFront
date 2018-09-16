@@ -1,21 +1,44 @@
 <div class="row">
     <div class="col-md-3 col-lg-3 col-xl-3"></div>
-    <div class="col-12 col-md-6 col-sm-12 col-lg-6 col-xl-6">
+    <div class="col-12 col-md-6 col-sm-12 col-lg-6 col-xl-6 bloc-contenu">
       <h2 class="title">Gestion Banque</h2>
       <div class="blocPrincipal">
-          <form method="post">
-              <div class="form-group filed-input">
-                <input type="date" name="dateDepot" class="input-generique">
+          <form method="post" class="form-horizontal filed-input">
+              <div class="form-group">
+                  <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="produit">Produit: </label>
+                  <select class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" name="libelle" id="produit" style="height: 32px;" (change)="onChange($event.target.value)">
+                    <option value="" selected>Choisir le produit</option>
+                    <option *ngFor="let produits of this.produit" value="{{produits.libelle}}">{{produits.libelle}}</option>
+                  </select>
               </div>
-              <div class="form-group filed-input">
-                <input type="text" name="argentDepot" class="input-generique" placeholder=" Somme deposé">
-              </div>
-              <div class="form-group filed-input">
-                <input type="text" name="numeroTicketDepot" class="input-generique" placeholder=" Numero ticket de depôt">
-              </div>
-              <div class="form-row filed-input">
-                  <button type="button" class="btn btn-large btn-successe" data-toggle="modal" data-target="popin">Valider</button>
-              </div>
+              <div class="form-group" *ngIf="this.venduInBanque.length > 0">
+                <div class="form-group">
+                  <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="semainevente">Semaine de vente: </label>
+                  <select class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" name="semaineVente" id="semainevente" style="height: 32px;" (change)="addBanque(venduinbanque)">
+                    <option *ngFor="let venduinbanque of this.venduInBanque" value="{{venduinbanque.id}}">{{venduinbanque.debutSemaine | date: 'yyyy-MM-dd'}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="datedepot">Date de depôt: </label>
+                  <input type="date" name="dateDepot" class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" id="datedepot" [(ngModel)]="this.banque.dateDepot">
+                </div>
+                <div class="form-group">
+                  <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="argentdepose">Somme deposé: </label>
+                  <input type="text" name="argentDepose" class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" id="argentdepose" [(ngModel)]="this.banque.argentDepose">
+                </div>
+                <div class="form-group">
+                  <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="numeroTicketDepot">Numero ticket de depôt: </label>
+                  <input type="text" name="numeroTicket" class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" id="numeroTicketDepot" [(ngModel)]="this.banque.numeroTicket">
+                </div>
+                <div class="form-row">
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col">
+                        <button type="button" class="btn btn-successe" data-toggle="modal" data-target="popin">Valider</button>
+                    </div>
+                </div>
+            </div>
           </form>
       </div>
       <!-- Alert reponse -->

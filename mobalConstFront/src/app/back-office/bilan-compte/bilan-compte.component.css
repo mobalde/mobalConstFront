@@ -1,6 +1,13 @@
 .modal-body table{
     width: 100%;
 }
+.modal-body{
+    text-align: center;
+}
+.modal-body label{
+    font-family: arial;
+    font-weight: 550;
+}
 .modal-body table .libeller{
     text-align: center;
 }

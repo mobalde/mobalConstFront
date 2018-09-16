@@ -15,7 +15,7 @@ declare var $: any;
 })
 export class BilanCompteComponent implements OnInit {
 
-  @ViewChild('tableBody') el:ElementRef;
+  // @ViewChild('tableBody') el:ElementRef;
 
   produit: Produit;
   listeVente: Array<Vendu> = [];
@@ -101,6 +101,13 @@ export class BilanCompteComponent implements OnInit {
   valider(){
     if(this.venteASupp !== null){
       this.listeVente = this.listeVente.filter(obj => obj !== this.venteASupp);
+      if(this.listeVente.length === 0) {
+        this.isActif = true; // On desactive le bouton
+        this.isAffiche = false;
+      }
+      else {
+        this.isActif = false; // On active le bouton
+      }
     } else {
       // Ajout listeVente
       this.bilancompteService.postListeVente(this.listeVente).subscribe(
@@ -112,10 +119,6 @@ export class BilanCompteComponent implements OnInit {
     }
     $('#popin').modal('toggle');
     this.venteASupp = null;
-    console.log("_______ list: ",this.listeVente);
-  }
-
-  removeLine(){
   }
 
   getMarchandise(libelle: String){

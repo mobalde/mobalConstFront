@@ -1,40 +1,41 @@
 <div class="row">
   <div class="col-md-3 col-lg-3 col-xl-3"></div>
-  <div class="col-12 col-md-6 col-sm-12 col-lg-6 col-xl-6">
+  <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 bloc-contenu">
     <h2 class="title">Gestion Marchandise</h2>
     <div class="blocPrincipal">
-        <form method="post">
-            <div class="form-row input-field-marchandise">
-              <div class="col">
-                  <span class="titre-champ">Date debut: </span>
-                  <input type="date" value = "{{marchandise.dateDebut | date: 'yyyy-MM-dd'}}" [(ngModel)]="marchandise.dateDebut" name="dateDebut" class="input-generique dateDebut">
-              </div>
-              <div class="col">
-                  <span class="titre-champ">Date fin: </span><input type="date" value = "{{marchandise.dateFin | date: 'yyyy-MM-dd'}}" [(ngModel)]="marchandise.dateFin" name="dateFin" class="input-generique dateFin">
-              </div>
+        <form method="post" class="form-horizontal filed-input">
+            <div class="form-group">
+                <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="datedebut">Date debut:</label>
+                <input class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7 dateDebut" type="date" value = "{{marchandise.dateDebut | date: 'yyyy-MM-dd'}}" [(ngModel)]="marchandise.dateDebut" name="dateDebut" id="datedebut">
             </div>
-            <div class="form-group filed-input">
-              <input type="text" name="nbSacVendu" [(ngModel)]="marchandise.nbSacVendu" (keyup)="calculTSacVendu_1($event)" placeholder=" Nombre de sac vendu par semaine" class="input-generique nbsacvendu">
+            <div class="form-group">
+                <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="datefin">Date fin:</label>
+                <input class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" type="date" value = "{{marchandise.dateFin | date: 'yyyy-MM-dd'}}" [(ngModel)]="marchandise.dateFin" id="datefin" name="dateFin">
             </div>
-            <div class="form-group filed-input">
-              <input [disabled]="true" type="text" name="nbSacAnterieur" [(ngModel)]="marchandise.nbSacAnterieur" class="input-generique" placeholder=" Nombre de sac anterieur vendu">
+            <div class="form-group">
+              <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="nbsacvendu">Sac vendu:</label>
+              <input class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" type="text" name="nbSacVendu" [(ngModel)]="marchandise.nbSacVendu" (keyup)="calculTSacVendu_1($event)" id="nbsacvendu" placeholder=" Nombre de sac vendu par semaine">
             </div>
-            <div class="form-group filed-input">
-              <input [disabled]="true" type="text" name="totalSacVendu" [(ngModel)]="marchandise.totalSacVendu" class="input-generique" placeholder=" Total sac vendu">
+            <div class="form-group">
+              <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="nbsacanterieur">Sac anterieur vendu:</label>
+              <input class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" [disabled]="true" type="text" name="nbSacAnterieur" [(ngModel)]="marchandise.nbSacAnterieur" id="nbsacanterieur" placeholder=" Nombre de sac anterieur vendu">
             </div>
-            <div class="form-group filed-input">
-              <input [disabled]="true" type="text" name="totalSacMarchandise" [(ngModel)]="marchandise.totalSacMarchandise" class="input-generique" placeholder=" Total sac marchandise">
+            <div class="form-group">
+              <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="totalsacvendu">Total sac vendu:</label>
+              <input class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" [disabled]="true" type="text" name="totalSacVendu" [(ngModel)]="marchandise.totalSacVendu" id="totalsacvendu" placeholder=" Total sac vendu">
             </div>
-            <div class="form-row filed-input total">
-              <div class="col">
-                <label>Total</label>
-              </div>
-              <div class="col">
-                <span>{{marchandise.totalSacRestant}}</span>
-              </div>
+            <div class="form-group">
+              <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="totalsacmarchandise">Total sac marchandise:</label>
+              <input class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" [disabled]="true" type="text" name="totalSacMarchandise" [(ngModel)]="marchandise.totalSacMarchandise" placeholder=" Total sac marchandise">
             </div>
-            <div class="form-row filed-input">
-              <button type="button" class="btn btn-large btn-successe" data-toggle="modal" data-target="#popin">Valider</button>
+            <div class="form-group total">
+              <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="total">Total:</label>
+              <label class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" for="vtotal">{{marchandise.totalSacRestant}}</label>
+            </div>
+            <div class="form-row">
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col"><button type="button" class="btn btn-successe" data-toggle="modal" data-target="#popin">Valider</button></div>
             </div>
         </form>
     </div>

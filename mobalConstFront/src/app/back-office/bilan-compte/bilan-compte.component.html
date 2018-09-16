@@ -1,26 +1,30 @@
 <div class="row">
   <div class="col-lg-1 col-md-1 col-xl-1"></div>
-  <div class="col-12 col-md-10  col-sm-12 col-lg-10 col-xl-10">
+  <div class="col-12 col-md-10  col-sm-12 col-lg-10 col-xl-10 bloc-contenu">
     <h2 class="title">Bilan du compte de la semaine</h2>
     <div class="blocPrincipal">
       <form method="post">
-        <div class="form-row filed-input">
+        <div class="form-row">
+          <div class="col"></div>
+          <div class="col"></div>
           <div class="col">
               <button class="btn btn-primere" (click)="openPopin('A')">Ajouter</button>
           </div>
           <div class="col">
               <button [disabled]="isActif" [ngClass]="getClass()" (click)="openPopin('V')">Valider</button>
           </div>
+          <div class="col"></div>
+          <div class="col"></div>
         </div>
         <div class="form-row">
           <table class="table table-striped input-field-bc">
             <thead *ngIf="isAffiche">
               <tr>
-                <th>Action</th>
-                <th>Date</th>
-                <th>Quantite</th>
-                <th>Prix unitaire</th>
-                <th>Total</th>
+                <th><strong>Action</strong></th>
+                <th><strong>Date</strong></th>
+                <th><strong>Quantite</strong></th>
+                <th><strong>Prix unitaire</strong></th>
+                <th><strong>Total</strong></th>
               </tr>
             </thead>
             <tbody class="tableBody" *ngIf="this.listeVente.length > 0">
@@ -28,10 +32,10 @@
                 <td style="text-align: center; cursor:pointer;">
                   <img src="../../../assets/remove-icone.png" width="30" height="30" title="supprimer" (click)="supprimer(i, vendu)">
                 </td>
-                <td style="text-align: center;"><label>{{vendu.dateVente | date: 'dd/MM/yyyy'}}</label></td>
-                <td style="text-align: center;"><label>{{vendu.quantite}}</label></td>
-                <td style="text-align: center;"><label>{{vendu.prixUnitaire}}</label></td>
-                <td style="text-align: center;"><label>{{vendu.total}}</label></td>
+                <td style="text-align: center;"><label class="label-generique">{{vendu.dateVente | date: 'dd/MM/yyyy'}}</label></td>
+                <td style="text-align: center;"><label class="label-generique">{{vendu.quantite}}</label></td>
+                <td style="text-align: center;"><label class="label-generique">{{vendu.prixUnitaire}}</label></td>
+                <td style="text-align: center;"><label class="label-generique">{{vendu.total}}</label></td>
               </tr>
             </tbody>
           </table>

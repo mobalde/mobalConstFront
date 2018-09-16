@@ -1,3 +1,4 @@
+import { Banque } from './models/banque';
 import { BanqueService } from './async-services/banque.services';
 import { VenduInBanque } from './models/vendu-in-banque';
 import { ProduitsService } from './../produit/async-services/produits.services';
@@ -14,11 +15,13 @@ import { Component, OnInit } from '@angular/core';
 export class BanqueComponent implements OnInit {
 
   venduInBanque: Array<VenduInBanque> = [];
+  banque: Banque = new Banque();
   produit: Produit[];
   constructor(private sharedService: SharedService, private http: Http, private produitService: ProduitsService, private banqueService: BanqueService) { }
 
   ngOnInit() {
     this.sharedService.displayHeader('pageBanque');
+    this.getProduitAll();
   }
 
   getListDeVenteNonComptabiliser(libelleProduit){
@@ -31,6 +34,14 @@ export class BanqueComponent implements OnInit {
         console.log("____ error");
       }
     );
+  }
+
+  onChange(values: String){
+    if(values !== ''){
+      this.getListDeVenteNonComptabiliser(values);
+    } else {
+      this.venduInBanque = [];
+    }
   }
 
   getProduitAll(){

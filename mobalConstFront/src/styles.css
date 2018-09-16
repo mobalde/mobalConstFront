@@ -1,17 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
-.bloc-contenu{
-    border: 1px solid #80808029;
-    padding: 26px 30px 27px 30px
+.form-group .aligntextright{
+    text-align: right;
 }
-.modal label{
-    margin-left: 10%;
+.form-group .aligntextleft{
+    text-align: left;
 }
 .modal-title{
     margin: 0 auto;
     color: blue;
 }
 .contents {
-    margin-top: 8rem;
+    margin-top: 87px;
 }
 .btn-warningue, .btn-primere, .btn-successe{
     color: #fff;
@@ -35,9 +34,9 @@ h1, h2{
 .position-right{
     float: right;
 }
-.filed-input input{
-    width:100%;
-    padding-left: 5px;
+.filed-input input, .filed-input select{
+    width: 15em;
+    padding-left: 3px;
 }
 .btn_left{
     float:right;
@@ -61,6 +60,16 @@ h1, h2{
     text-align: center;
 }
 @media (min-width: 993px){
+    .blocPrincipal .label-generique{
+        font-family: arial;
+        font-size: 18px;
+    }
+    .bloc-contenu{
+        border: 1px solid #80808029;
+        padding-top: 10px;
+        padding-bottom: 12px;
+        background: #e7f1fd;
+    }
 }
 @media (min-width: 769px) and (max-width: 992px){
 }
