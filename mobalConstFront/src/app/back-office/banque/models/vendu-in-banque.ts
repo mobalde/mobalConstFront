@@ -7,4 +7,5 @@ export class VenduInBanque{
 	finSemaine: Date;
 	banqueDto: Banque;
 	venduDto: Vendu[];
+	totalVente: Number;
 }

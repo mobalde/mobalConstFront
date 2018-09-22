@@ -17,6 +17,7 @@ export class BanqueComponent implements OnInit {
   venduInBanque: Array<VenduInBanque> = [];
   banque: Banque = new Banque();
   produit: Produit[];
+  venteSemaine: VenduInBanque = new VenduInBanque();
   constructor(private sharedService: SharedService, private http: Http, private produitService: ProduitsService, private banqueService: BanqueService) { }
 
   ngOnInit() {
@@ -54,5 +55,9 @@ export class BanqueComponent implements OnInit {
         console.log('____ error ');
       }
     );
+  }
+
+  addBanque(id: Number){
+    this.venteSemaine = this.venduInBanque.find(x => x.id === +id);
   }
 }
