@@ -7,6 +7,8 @@ import { Http } from '@angular/http';
 import { SharedService } from './../../shared/shared.service';
 import { Component, OnInit } from '@angular/core';
 
+declare var $: any;
+
 @Component({
   selector: 'app-banque',
   templateUrl: './banque.component.html',
@@ -29,7 +31,6 @@ export class BanqueComponent implements OnInit {
     this.banqueService.getListDeVenteNonComptabiliser(libelleProduit).subscribe(
       data => {
         this.venduInBanque = data;
-        console.log('_______ data: ',data);
       },
       error => {
         console.log("____ error");
@@ -49,7 +50,6 @@ export class BanqueComponent implements OnInit {
     this.produitService.getAllProduit().subscribe(
       data => {
         this.produit = data;
-        console.log('____ data: ',data);
       },
       error => {
         console.log('____ error ');
@@ -59,5 +59,42 @@ export class BanqueComponent implements OnInit {
 
   addBanque(id: Number){
     this.venteSemaine = this.venduInBanque.find(x => x.id === +id);
+  }
+
+  openPopin(){
+    // Verification champs
+    if(!this.venteSemaine.totalVente){
+      $('#semainevente').css('border', '1px solid red');
+    }
+    else if(!this.banque.dateDepot){
+      $('#semainevente').css('border', '1px solid #808080ad');
+      $('#datedepot').css('border', '1px solid red');
+    }
+    else if(!this.banque.argentDepose){
+      $('#argentdepose').css('border', '1px solid #808080ad');
+      $('#argentdepose').css('border', '1px solid red');
+    } 
+    else if(!this.banque.numeroTicket){
+      $('#numeroTicketDepot').css('border', '1px solid #808080ad');
+      $('#numeroTicketDepot').css('border', '1px solid red');
+    }
+    else {
+      $("#popin").modal("show");
+    }
+  }
+
+  valider(){
+    this.venteSemaine.banqueDto = this.banque;
+    this.venteSemaine.isDepotBanque = true;
+    this.banqueService.postVenteSemaine(this.venteSemaine).subscribe(
+      data => {
+        this.venduInBanque = data;
+        $('#popin').modal('toggle');
+        this.sharedService.afficheAlerte('alert-success', 'class');
+      },
+      error => {
+        $('#popin').modal('toggle');
+      }
+    );
   }
 }
