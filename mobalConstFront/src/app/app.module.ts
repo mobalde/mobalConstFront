@@ -30,7 +30,7 @@ const appRoute: Routes = [
         { path: 'banque', component: BanqueComponent, canActivate: [AuthGuardService]},
         { path: 'marchandise', component: MarchandiseComponent, canActivate: [AuthGuardService]},
         { path: 'bilanCompte', component: BilanCompteComponent, canActivate: [AuthGuardService]},
-        { path: 'error', redirectTo: ''},
+        { path: 'error', component: ErrorPageComponent},
         { path: '', component: LoginComponent },
 ]; 
 

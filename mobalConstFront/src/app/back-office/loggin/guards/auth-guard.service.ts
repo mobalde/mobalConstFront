@@ -15,8 +15,8 @@ export class AuthGuardService implements CanActivate{
     constructor(private router: Router, private http: Http, private sharedService: SharedService, private loginService: LoginService) {
     }
     canActivate (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        this.timeOut();
         let user = JSON.parse(localStorage.getItem('currentUser'));
+        // this.timeOut(state);
         if(user !== null){
             return this.http.get(this.sharedService.getApi('currentUser/'+user.email), this.sharedService.options)
             .map((res: Response) => {
@@ -25,35 +25,44 @@ export class AuthGuardService implements CanActivate{
                        return true;
                     }
                 }
-                this.router.navigate[''];
+                state.url = '';
+                location.href = 'http://localhost:4200';
                 return false;
             }).catch(() => {
-                this.router.navigate[''];
+                if(state.url === ''){
+                    this.router.navigate(['']);
+                }
+                else {
+                    state.url = '';
+                    this.deleteCurrUser();
+                    location.href = 'http://localhost:4200';
+                }
                 return Observable.of(false);
               });
         }
         else{
-            this.router.navigate[''];
             return Observable.of(false);
         }
     }
 
     // Si aucune activité sur l'appli pendant 30mn, se deconnecter
-    timeOut(){
+    /*timeOut(state: RouterStateSnapshot){
         var dateTimes = new Date();
         var timesNow = dateTimes.getTime();
         var dates1 = parseInt(localStorage.getItem('temps'));
         var diff = timesNow - dates1;
         var sec = Math.floor(diff/1000); // Nombre de seconde entre les 2 dates
-        if(!isNaN(sec) && sec > 1200){
+        if(!isNaN(sec) && sec > 20 ){
             localStorage.removeItem('temps');
             this.loginService.logout().subscribe(
                 data => {
                     if(localStorage.getItem('currentUser') !== null){
-                      localStorage.removeItem('currentUser');
+                      this.deleteCurrUser();
                     }
+                    state.url = '';
                     this.router.navigate(['']);
                 }, error => {
+                  state.url = '';
                   this.router.navigate(['']);
                 }
             );
@@ -63,5 +72,10 @@ export class AuthGuardService implements CanActivate{
             localStorage.removeItem('temps');
             localStorage.setItem('temps',JSON.stringify(timesNow));
         }
+    }*/
+
+    deleteCurrUser(){
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('temps');
     }
 }
