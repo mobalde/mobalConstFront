@@ -6,5 +6,6 @@ export class Banque{
 	argentDepose: Number;
 	total: Number;
 	isDepot: boolean;
-	isRetrait: boolean
+	isRetrait: boolean;
+	soldeAnterieur: Number;
 }

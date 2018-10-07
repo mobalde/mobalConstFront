@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Banque } from './models/banque';
 import { BanqueService } from './async-services/banque.services';
 import { VenduInBanque } from './models/vendu-in-banque';
@@ -19,12 +20,23 @@ export class BanqueComponent implements OnInit {
   venduInBanque: Array<VenduInBanque> = [];
   banque: Banque = new Banque();
   produit: Produit[];
+  soldeAnt: Number;
   venteSemaine: VenduInBanque = new VenduInBanque();
-  constructor(private sharedService: SharedService, private http: Http, private produitService: ProduitsService, private banqueService: BanqueService) { }
+  constructor(private sharedService: SharedService, private http: Http, private produitService: ProduitsService, 
+              private banqueService: BanqueService, private router: Router) { }
 
   ngOnInit() {
     this.sharedService.displayHeader('pageBanque');
     this.getProduitAll();
+    this.getSoldeAnterieur();
+  }
+
+  getSoldeAnterieur(){
+    this.banqueService.getSoldeAnterieur().subscribe(
+      data => {
+        this.soldeAnt = data;
+      }
+    );
   }
 
   getListDeVenteNonComptabiliser(libelleProduit){
@@ -84,13 +96,15 @@ export class BanqueComponent implements OnInit {
   }
 
   valider(){
+    this.banque.isDepot = true; // A rajouter dans le formulaire
+    this.banque.soldeAnterieur = this.soldeAnt;
     this.venteSemaine.banqueDto = this.banque;
     this.venteSemaine.isDepotBanque = true;
     this.banqueService.postVenteSemaine(this.venteSemaine).subscribe(
       data => {
-        this.venduInBanque = data;
         $('#popin').modal('toggle');
         this.sharedService.afficheAlerte('alert-success', 'class');
+        this.router.navigate([this.router.url]);
       },
       error => {
         $('#popin').modal('toggle');

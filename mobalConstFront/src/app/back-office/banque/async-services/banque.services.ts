@@ -22,15 +22,27 @@ export class BanqueService{
         });
     }
 
-    postVenteSemaine(venteSem: VenduInBanque): Observable<VenduInBanque[]>{
+    postVenteSemaine(venteSem: VenduInBanque){
         const data = JSON.stringify(venteSem);
         return this.http.post(this.sharedService.getApi('save/venteSemaine/'), data, this.sharedService.options)
             .timeout(60000)
             .map((res: Response) => res.json())
             .catch((error: Response | any): any => {
                 if(error.status === 403){
-                this.sharedService.displayError('errorConnexion');
-                Observable.throw(error);
+                    this.sharedService.displayError('errorConnexion');
+                    Observable.throw(error);
+                }
+            });
+    }
+
+    getSoldeAnterieur(): Observable<Number>{
+        return this.http.get(this.sharedService.getApi('getsoldeanterieur'), this.sharedService.options)
+            .timeout(60000)
+            .map((res: Response) => res.json())
+            .catch((error: Response | any): any => {
+                if(error.status === 403){
+                    this.sharedService.displayError('errorConnexion');
+                    Observable.throw(error);
                 }
             });
     }
