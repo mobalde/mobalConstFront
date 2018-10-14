@@ -22,10 +22,7 @@ export class LoginService {
     .timeout(60000)
     .map((res: Response) => res.json())
     .catch((error: Response | any): any => {
-      if(error.status === 403){
-        this.sharedService.displayError('errorConnexion');
-        Observable.throw(error);
-      }
+        location.href = 'http://localhost:4200';
     });
   }
 
@@ -35,7 +32,7 @@ export class LoginService {
    .timeout(60000)
    .map((res: Response) => res.json())
    .catch((error: Response): any => {
-        Observable.throw(error);
+      location.href = 'http://localhost:4200';
     });
  }
 

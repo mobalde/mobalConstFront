@@ -1,4 +1,5 @@
 import { Router } from '@angular/router';
+import { delay } from 'rxjs/operators';
 import { Banque } from './models/banque';
 import { BanqueService } from './async-services/banque.services';
 import { VenduInBanque } from './models/vendu-in-banque';
@@ -28,11 +29,10 @@ export class BanqueComponent implements OnInit {
   ngOnInit() {
     this.sharedService.displayHeader('pageBanque');
     this.getProduitAll();
-    this.getSoldeAnterieur();
   }
 
-  getSoldeAnterieur(){
-    this.banqueService.getSoldeAnterieur().subscribe(
+  getSoldeAnterieur(id: Number){
+    this.banqueService.getSoldeAnterieur(id).subscribe(
       data => {
         this.soldeAnt = data;
       }
@@ -71,6 +71,7 @@ export class BanqueComponent implements OnInit {
 
   addBanque(id: Number){
     this.venteSemaine = this.venduInBanque.find(x => x.id === +id);
+    this.getSoldeAnterieur(id);
   }
 
   openPopin(){
@@ -96,19 +97,21 @@ export class BanqueComponent implements OnInit {
   }
 
   valider(){
-    this.banque.isDepot = true; // A rajouter dans le formulaire
     this.banque.soldeAnterieur = this.soldeAnt;
     this.venteSemaine.banqueDto = this.banque;
-    this.venteSemaine.isDepotBanque = true;
+    this.venteSemaine.depotBanque = true;
     this.banqueService.postVenteSemaine(this.venteSemaine).subscribe(
       data => {
-        $('#popin').modal('toggle');
-        this.sharedService.afficheAlerte('alert-success', 'class');
-        this.router.navigate([this.router.url]);
+        setTimeout( () => { 
+          location.reload();
+         }, 1000 );
+         $('#popin').modal('toggle');
+         this.sharedService.afficheAlerte('alert-success', 'class');
       },
       error => {
         $('#popin').modal('toggle');
       }
     );
   }
+  
 }

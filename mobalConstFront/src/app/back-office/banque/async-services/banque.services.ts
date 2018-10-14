@@ -35,8 +35,8 @@ export class BanqueService{
             });
     }
 
-    getSoldeAnterieur(): Observable<Number>{
-        return this.http.get(this.sharedService.getApi('getsoldeanterieur'), this.sharedService.options)
+    getSoldeAnterieur(id: Number): Observable<Number>{
+        return this.http.get(this.sharedService.getApi('getsoldeanterieur/'+id), this.sharedService.options)
             .timeout(60000)
             .map((res: Response) => res.json())
             .catch((error: Response | any): any => {
