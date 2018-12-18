@@ -45,35 +45,6 @@ export class AuthGuardService implements CanActivate{
         }
     }
 
-    // Si aucune activité sur l'appli pendant 30mn, se deconnecter
-    /*timeOut(state: RouterStateSnapshot){
-        var dateTimes = new Date();
-        var timesNow = dateTimes.getTime();
-        var dates1 = parseInt(localStorage.getItem('temps'));
-        var diff = timesNow - dates1;
-        var sec = Math.floor(diff/1000); // Nombre de seconde entre les 2 dates
-        if(!isNaN(sec) && sec > 20 ){
-            localStorage.removeItem('temps');
-            this.loginService.logout().subscribe(
-                data => {
-                    if(localStorage.getItem('currentUser') !== null){
-                      this.deleteCurrUser();
-                    }
-                    state.url = '';
-                    this.router.navigate(['']);
-                }, error => {
-                  state.url = '';
-                  this.router.navigate(['']);
-                }
-            );
-            return false;
-        }
-        else {
-            localStorage.removeItem('temps');
-            localStorage.setItem('temps',JSON.stringify(timesNow));
-        }
-    }*/
-
     deleteCurrUser(){
         localStorage.removeItem('currentUser');
         localStorage.removeItem('temps');

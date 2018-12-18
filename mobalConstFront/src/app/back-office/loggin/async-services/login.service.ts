@@ -21,7 +21,7 @@ export class LoginService {
     return this.http.post(this.sharedService.getApi('login'), data,  this.sharedService.options)
     .timeout(60000)
     .map((res: Response) => res.json())
-    .catch((error: Response | any): any => {
+    .catch((error) : any => {
         location.href = 'http://localhost:4200';
     });
   }

@@ -35,14 +35,15 @@ export class LoginComponent implements OnInit {
 
   logger(){
     this.loginService.authentification(this.user.email,this.user.password).subscribe(
-      data => {
+      (data) => {
         this.user = data;
         localStorage.setItem('currentUser', JSON.stringify(this.user)); // Sauvegarder l'utilisateur dans la variable de session
         var datetimes = new Date();
         localStorage.setItem('temps',JSON.stringify(datetimes.getTime())); 
         this.router.navigate(['home']);
       },
-      err => {
+      (err) => {
+        this.erreurConnexion = 'pas bon';
         console.log("____ err: ",err);
       }
     );
