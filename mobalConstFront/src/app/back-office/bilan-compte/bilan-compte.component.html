@@ -21,6 +21,7 @@
             <thead *ngIf="isAffiche">
               <tr>
                 <th><strong>Action</strong></th>
+                <th><strong>Produit</strong></th>
                 <th><strong>Date</strong></th>
                 <th><strong>Quantite</strong></th>
                 <th><strong>Prix unitaire</strong></th>
@@ -32,6 +33,7 @@
                 <td style="text-align: center; cursor:pointer;">
                   <img src="../../../assets/remove-icone.png" width="30" height="30" title="supprimer" (click)="supprimer(i, vendu)">
                 </td>
+                <td style="text-align: center;"><label class="label-generique">{{vendu.produit.libelle}} - {{vendu.produit.type}}</label></td>
                 <td style="text-align: center;"><label class="label-generique">{{vendu.dateVente | date: 'dd/MM/yyyy'}}</label></td>
                 <td style="text-align: center;"><label class="label-generique">{{vendu.quantite}}</label></td>
                 <td style="text-align: center;"><label class="label-generique">{{vendu.prixUnitaire}}</label></td>
@@ -45,6 +47,9 @@
     <!-- Alert reponse -->
     <div class="alert alert-success" role="alert" style="display:none;">
         <strong>Le bilan de la semaine a éte ajouté</strong>
+    </div>
+    <div class="alert alert-warning" role="alert" style="display:none;">
+        <strong>Le bilan de la semaine n'a pas éte ajouté</strong>
     </div>
   </div>
   <div class="col-lg-1 col-md-1 col-xl-1"></div>
@@ -61,16 +66,25 @@
           <div class="col-12 col-md-12 col-sm-12 col-lg-12 col-xl-12">
             <table>
               <tr>
-                  <td class="libeller">Date vente* :</td>
-                  <td><input type="Date" name="dateVente" class="input-field dateVente"></td>
+                <td class="libeller">Produit</td>
+                <td>
+                  <select class="input-field" name="produitSelect" id="produitSelect">
+                    <option value="" selected>Choisir le produit </option>
+                    <option *ngFor="let produit of this.sharedService._prduitAll" value="{{produit.id}}">{{produit.libelle}} - {{produit.type}}</option>
+                  </select> 
+                </td>
+              </tr>
+              <tr>
+                <td class="libeller">Date vente* :</td>
+                <td><input type="Date" name="dateVente" class="input-field dateVente" [(ngModel)]="vendu.dateVente"></td>
               </tr>
               <tr>
                   <td class="libeller">Quantite* : </td>
-                  <td><input type="text" name="quantite" class="input-field quantite"></td>
+                  <td><input type="text" name="quantite" class="input-field quantite" [(ngModel)]="vendu.quantite"></td>
               </tr>
               <tr>
                   <td class="libeller">Prix unitaire* :</td>
-                  <td><input type="text" name="prixUnitaire" class="input-field prxUnitaire"></td>
+                  <td><input type="text" name="prixUnitaire" class="input-field prxUnitaire" [(ngModel)]="vendu.prixUnitaire"></td>
               </tr>
             </table>
           </div>

@@ -1,3 +1,5 @@
+import { Produit } from "../../produit/models/produit";
+
 export class Marchandise {
 	dateDebut: Date;
 	dateFin: Date;
@@ -5,6 +7,6 @@ export class Marchandise {
 	nbSacAnterieur: Number;
 	totalSacVendu: Number;
 	totalSacMarchandise: Number;
-	totalSacRestant: Number = 0
-	idProduit: Number;
+	totalSacRestant: Number;
+	produitDto: Produit;
 }

@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('currentUser', JSON.stringify(this.user)); // Sauvegarder l'utilisateur dans la variable de session
         var datetimes = new Date();
         localStorage.setItem('temps',JSON.stringify(datetimes.getTime())); 
+        this.sharedService.getProduitAll();
         this.router.navigate(['home']);
       },
       (err) => {

@@ -20,7 +20,6 @@ export class BanqueComponent implements OnInit {
 
   venduInBanque: Array<VenduInBanque> = [];
   banque: Banque = new Banque();
-  produit: Produit[];
   soldeAnt: Number;
   venteSemaine: VenduInBanque = new VenduInBanque();
   constructor(private sharedService: SharedService, private http: Http, private produitService: ProduitsService, 
@@ -28,7 +27,6 @@ export class BanqueComponent implements OnInit {
 
   ngOnInit() {
     this.sharedService.displayHeader('pageBanque');
-    this.getProduitAll();
   }
 
   getSoldeAnterieur(id: Number){
@@ -39,7 +37,7 @@ export class BanqueComponent implements OnInit {
     );
   }
 
-  getListDeVenteNonComptabiliser(libelleProduit){
+  getListDeVenteNonComptabiliser(libelleProduit: String){
     this.banqueService.getListDeVenteNonComptabiliser(libelleProduit).subscribe(
       data => {
         this.venduInBanque = data;
@@ -56,17 +54,6 @@ export class BanqueComponent implements OnInit {
     } else {
       this.venduInBanque = [];
     }
-  }
-
-  getProduitAll(){
-    this.produitService.getAllProduit().subscribe(
-      data => {
-        this.produit = data;
-      },
-      error => {
-        console.log('____ error ');
-      }
-    );
   }
 
   addBanque(id: Number){

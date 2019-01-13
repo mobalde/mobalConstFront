@@ -15,24 +15,24 @@ declare var $: any;
 })
 export class BilanCompteComponent implements OnInit {
 
-  // @ViewChild('tableBody') el:ElementRef;
+  vendu: Vendu = new Vendu();
 
-  produit: Produit;
   listeVente: Array<Vendu> = [];
 
   isAffiche: boolean = false;
   isActif: boolean = true;
 
   message: String = null;
-  elementPop: Number;
 
   venteASupp: Vendu = null;
 
-  constructor(private bilancompteService: BilancompteService, private sharedService: SharedService, private produitService: ProduitsService, private http: Http) { }
+  constructor(private bilancompteService: BilancompteService, private sharedService: SharedService, private produitService: ProduitsService, private http: Http) { 
+
+  }
 
   ngOnInit() {
     this.sharedService.displayHeader('pagebilanCompte');
-    this.getMarchandise('ciment');
+    // this.getMarchandise('ciment');
   }
 
   openPopin(elements: String){
@@ -47,10 +47,10 @@ export class BilanCompteComponent implements OnInit {
 
   add(){
     // Add bilan dans la liste.
-    if($('.dateVente').val() === '' || $('.quantite').val() === '' || $('.prxUnitaire').val() === ''){
+    if($('.dateVente').val() === '' || $('.quantite').val() === '' || $('.prxUnitaire').val() === '' || $('#produitSelect').val() === ''){
       this.colorEmptyInput();
     } else {
-      $('#popinAjout').modal('toggle');
+      $('#popinAjout').modal('toggle'); 
       this.constructListVente();
       if(!this.isAffiche){
         this.isAffiche = true;
@@ -60,17 +60,13 @@ export class BilanCompteComponent implements OnInit {
   }
 
   constructListVente(){
-      let vendu = new Vendu();
-      vendu.dateVente = $('.dateVente').val();
-      vendu.prixUnitaire = $('.prxUnitaire').val();
-      vendu.quantite = $('.quantite').val();
-      vendu.total = $('.prxUnitaire').val()*$('.quantite').val();
-      vendu.idProduit = this.produit.id;
-      this.listeVente.push(vendu);
+      this.vendu.total = $('.prxUnitaire').val()*$('.quantite').val();
+      this.vendu.produit = this.sharedService._prduitAll.find(produit => produit.id === +$('#produitSelect').val());
+      this.listeVente.push(this.vendu);
+      this.vendu = new Vendu();
   }
 
   supprimer(elements: Number, vendu: Vendu){
-    this.elementPop = elements;
     this.venteASupp = vendu;
     var date = new Date(vendu.dateVente);
     this.message = "Voulez-vous supprimer le bilan du "+new Intl.DateTimeFormat("en-GB").format(date)+" ?";
@@ -78,16 +74,20 @@ export class BilanCompteComponent implements OnInit {
   }
 
   colorEmptyInput(){
-    if($('.dateVente').val() === ''){
+    if($('#produitSelect').val() === ''){
+      $('#produitSelect').css('border', '1px solid red');
+    } else if(!this.vendu.dateVente){
       $('.dateVente').css('border', '1px solid red');
-    } else if ($('.quantite').val() === ''){
+      $('#produitSelect').css('border', '1px solid #808080ad');
+    } else if (!this.vendu.quantite){
       $('.dateVente').css('border', '1px solid #808080ad');
       $('.quantite').css('border', '1px solid red');
-    } else if ($('.prxUnitaire').val() === ''){
+    } else if (!this.vendu.prixUnitaire){
       $('.quantite').css('border', '1px solid #808080ad');
       $('.dateVente').css('border', '1px solid #808080ad');
       $('.prxUnitaire').css('border', '1px solid red');
     } else {
+      $('#produitSelect').css('border', '1px solid #808080ad');
       $('.quantite').css('border', '1px solid #808080ad');
       $('.dateVente').css('border', '1px solid #808080ad');
       $('.prxUnitaire').css('border', '1px solid #808080ad');
@@ -101,19 +101,18 @@ export class BilanCompteComponent implements OnInit {
   valider(){
     if(this.venteASupp !== null){
       this.listeVente = this.listeVente.filter(obj => obj !== this.venteASupp);
-      if(this.listeVente.length === 0) {
-        this.isActif = true; // On desactive le bouton
-        this.isAffiche = false;
-      }
-      else {
-        this.isActif = false; // On active le bouton
-      }
+      this.activeBouton();
     } else {
       // Ajout listeVente
       this.bilancompteService.postListeVente(this.listeVente).subscribe(
         data => {
-          this.listeVente = [];
-          this.sharedService.afficheAlerte('alert-success', 'class');
+          if(data){
+            this.listeVente = [];
+            this.sharedService.afficheAlerte('alert-success', 'class');
+          } else{
+            this.sharedService.afficheAlerte('alert-warning', 'class');
+          }
+          this.activeBouton();
         }
       );
     }
@@ -121,15 +120,24 @@ export class BilanCompteComponent implements OnInit {
     this.venteASupp = null;
   }
 
-  getMarchandise(libelle: String){
-    this.produitService.getProduit(libelle).subscribe(
-      data => {
-        this.produit = data;
-      }, err => {
-        console.log("_____ error: ",err);
-      }
-    );
+  // getMarchandise(libelle: String){
+  //   this.produitService.getProduit(libelle).subscribe(
+  //     data => {
+  //       this.produit = data;
+  //     }, err => {
+  //       console.log("_____ error: ",err);
+  //     }
+  //   );
+  // }
+ 
+  activeBouton(){
+    if(this.listeVente.length === 0) {
+      this.isActif = true; // On desactive le bouton
+      this.isAffiche = false;
+    }
+    else {
+      this.isActif = false; // On active le bouton
+    }
   }
-
 
 }

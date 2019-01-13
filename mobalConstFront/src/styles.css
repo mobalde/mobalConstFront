@@ -59,6 +59,9 @@ h1, h2{
 .input-field-bc th{
     text-align: center;
 }
+.alert{
+    text-align: center;
+}
 @media (min-width: 993px){
     .blocPrincipal .label-generique{
         font-family: arial;

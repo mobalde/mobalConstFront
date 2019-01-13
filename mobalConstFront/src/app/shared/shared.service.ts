@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import * as $ from 'jquery';
+import { Produit } from '../back-office/produit/models/produit';
 
 @Injectable()
 export class SharedService {
@@ -18,15 +19,16 @@ export class SharedService {
 
     _valeur: String = null;
 
+    _prduitAll: Produit[];
+
     headerPageSubject: Subject<String> = new Subject<String>();
 
     errorSubject: Subject<String> = new Subject<String>();
 
-    constructor(private route: ActivatedRoute, private router: Router) {
+    constructor(private route: ActivatedRoute, private router: Router, private http: Http) {
         this.headerPageSubject.subscribe((value) => {
             this._valeur = value;
         });
-
         this.errorSubject.subscribe(
             (value) => {
                 this._valeur = value;
@@ -87,6 +89,23 @@ export class SharedService {
                     }, 5000);
             break;
         }
+    }
+
+    public getProduitAll(){
+        this.getAllProduit().subscribe(
+            data => {
+                this._prduitAll = data;
+            }
+        );
+    }
+
+    public getAllProduit():Observable<Produit[]>{
+        return this.http.get(this.getApi('produit/all'), this.options)
+        .timeout(60000)
+        .map((res: Response) => res.json())
+        .catch((error: Response | any): any => {
+            Observable.throw(error);
+        });
     }
 
 }

@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute, Params } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
+import { Produit } from '../../produit/models/produit';
 
 @Injectable()
 export class BilancompteService{

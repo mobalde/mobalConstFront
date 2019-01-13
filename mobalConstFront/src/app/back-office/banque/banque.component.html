@@ -8,14 +8,14 @@
                   <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="produit">Produit: </label>
                   <select class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" name="libelle" id="produit" style="height: 32px;" (change)="onChange($event.target.value)">
                     <option value="" selected>Choisir le produit</option>
-                    <option *ngFor="let produits of this.produit" value="{{produits.libelle}}">{{produits.libelle}}</option>
+                    <option *ngFor="let produit of this.sharedService._prduitAll" value="{{produit.libelleEnum}}">{{produit.libelle}} - {{produit.type}}</option>
                   </select>
               </div>
               <div class="form-group" *ngIf="this.venduInBanque.length > 0">
                 <div class="form-group">
                   <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="semainevente">Semaine de vente: </label>
                   <select class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" name="semaineVente" id="semainevente" style="height: 32px;" (change)="addBanque($event.target.value)">
-                    <option value="" selected>Semaine de vente</option>
+                    <option value="" selected>Choisir la semaine de vente</option>
                     <option *ngFor="let venduinbanque of this.venduInBanque" value="{{venduinbanque.id}}">{{venduinbanque.debutSemaine | date: 'yyyy-MM-dd'}}</option>
                   </select>
                 </div>

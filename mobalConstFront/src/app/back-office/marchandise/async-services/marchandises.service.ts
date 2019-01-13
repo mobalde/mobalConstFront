@@ -26,8 +26,8 @@ export class MarchandisesService{
           });
     }
 
-    getNombreDeSacAnterieur(): Observable<Number> {
-        return this.http.get(this.sharedService.getApi('sacAnterieur'), this.sharedService.options)
+    calculNombreSacVendu(idProduit: Number): Observable<Marchandise>{
+      return this.http.get(this.sharedService.getApi('nombreSacVendu/'+idProduit), this.sharedService.options)
         .timeout(60000)
         .map((res: Response) => res.json())
         .catch((error: Response | any): any => {

@@ -25,6 +25,9 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(localStorage.getItem('currentUser') !== null){
+      this.sharedService.getProduitAll();
+    }
   }
 
   ngAfterContentChecked(){

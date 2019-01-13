@@ -6,6 +6,7 @@ import { Http } from '@angular/http';
 import { SharedService } from './../../shared/shared.service';
 import { Component, OnInit } from '@angular/core';
 import {} from 'ngx-bootstrap';
+import { Produit } from '../produit/models/produit';
 
 @Component({
   selector: 'app-marchandise',
@@ -15,25 +16,26 @@ import {} from 'ngx-bootstrap';
 export class MarchandiseComponent implements OnInit {
 
   marchandise: Marchandise = new Marchandise();
+  produit: Produit;
+
+  isDisplayBloc = false;
 
   constructor(private sharedService: SharedService, private produitService: ProduitsService, private http: Http, private marchandiseService: MarchandisesService) { }
 
   ngOnInit() {
     this.sharedService.displayHeader('pageMarchandise');
-    this.totalMarchandises('ciment'); // A adapter lorsqu'il y aura d'autre marchandise
-    this.getNombreDeSacAnterieur();
   }
 
-  calculTSacVendu_1(event: any){
-    if(this.marchandise.nbSacAnterieur >= 0 ) {
-      this.marchandise.totalSacVendu = +this.marchandise.nbSacAnterieur + +event.target.value;
-    }
-    this.calculTotalSacRestant();
-  }
+  // calculTSacVendu_1(event: any){
+  //   if(this.marchandise.nbSacAnterieur >= 0 ) {
+  //     this.marchandise.totalSacVendu = +this.marchandise.nbSacAnterieur + +event.target.value;
+  //   }
+  //   this.calculTotalSacRestant();
+  // }
 
-  calculTotalSacRestant(){
-    this.marchandise.totalSacRestant = +this.marchandise.totalSacMarchandise - +this.marchandise.totalSacVendu;
-  }
+  // calculTotalSacRestant(){
+  //   this.marchandise.totalSacRestant = +this.marchandise.totalSacMarchandise - +this.marchandise.totalSacVendu;
+  // }
 
   valider(){
     $('.modal').modal('toggle');
@@ -52,6 +54,7 @@ export class MarchandiseComponent implements OnInit {
         data => {
           this.marchandise = data;
           this.sharedService.afficheAlerte('alert-success', 'class');
+          this.isDisplayBloc = false;
         }, err => {
           console.log("_____ error: ",err);
         }
@@ -59,23 +62,29 @@ export class MarchandiseComponent implements OnInit {
     }
   }
 
-  totalMarchandises(libelle: String){
-    this.produitService.getProduit(libelle).subscribe(
-      data => {
-        this.marchandise.totalSacMarchandise = data.quantiteCommande;
-        this.marchandise.idProduit = data.id;
-      }, err => {
-        console.log("_____ error: ",err);
+  onChange(values: String){
+    if(values !== ''){
+      this.produit = this.sharedService._prduitAll.find(produit => produit.type === values);
+      if(this.produit.libelleEnum === 'CIMENT'){
+        this.getCalculeNombreSacVendu(this.produit.id, values);
+        this.isDisplayBloc = true;
+      } else {
+        alert("Le produit "+values+" n'est pas encore geré");
+        this.isDisplayBloc = false;
       }
-    );
+    } else {
+      this.isDisplayBloc = false;
+    }
   }
 
-  getNombreDeSacAnterieur(){
-    this.marchandiseService.getNombreDeSacAnterieur().subscribe(
+  getCalculeNombreSacVendu(id: Number, values: String){
+    this.marchandiseService.calculNombreSacVendu(this.produit.id).subscribe(
       data => {
-        this.marchandise.nbSacAnterieur = data;
-      }, err => {
-        console.log("_____ error: ",err);
+        this.marchandise = data;
+        this.marchandise.totalSacMarchandise = this.produit.quantiteCommande;
+        this.marchandise.totalSacVendu = +this.marchandise.nbSacAnterieur + +this.marchandise.nbSacVendu;
+        this.marchandise.totalSacRestant = +this.marchandise.totalSacMarchandise - +this.marchandise.totalSacVendu;
+        this.marchandise.produitDto = this.produit;
       }
     );
   }
