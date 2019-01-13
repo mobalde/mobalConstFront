@@ -67,7 +67,6 @@ export class MarchandiseComponent implements OnInit {
       this.produit = this.sharedService._prduitAll.find(produit => produit.type === values);
       if(this.produit.libelleEnum === 'CIMENT'){
         this.getCalculeNombreSacVendu(this.produit.id, values);
-        this.isDisplayBloc = true;
       } else {
         alert("Le produit "+values+" n'est pas encore geré");
         this.isDisplayBloc = false;
@@ -81,10 +80,16 @@ export class MarchandiseComponent implements OnInit {
     this.marchandiseService.calculNombreSacVendu(this.produit.id).subscribe(
       data => {
         this.marchandise = data;
-        this.marchandise.totalSacMarchandise = this.produit.quantiteCommande;
-        this.marchandise.totalSacVendu = +this.marchandise.nbSacAnterieur + +this.marchandise.nbSacVendu;
-        this.marchandise.totalSacRestant = +this.marchandise.totalSacMarchandise - +this.marchandise.totalSacVendu;
-        this.marchandise.produitDto = this.produit;
+        if(+data.nbSacVendu > 0){
+          this.marchandise.totalSacMarchandise = this.produit.quantiteCommande;
+          this.marchandise.totalSacVendu = +this.marchandise.nbSacAnterieur + +this.marchandise.nbSacVendu;
+          this.marchandise.totalSacRestant = +this.marchandise.totalSacMarchandise - +this.marchandise.totalSacVendu;
+          this.marchandise.produitDto = this.produit;
+          this.isDisplayBloc = true;
+        } else {
+          this.isDisplayBloc = false;
+          alert("Pas de vente réalisée pour ce produit "+values);
+        }
       }
     );
   }
