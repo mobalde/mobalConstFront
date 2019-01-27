@@ -33,7 +33,7 @@
                 <td style="text-align: center; cursor:pointer;">
                   <img src="../../../assets/remove-icone.png" width="30" height="30" title="supprimer" (click)="supprimer(i, vendu)">
                 </td>
-                <td style="text-align: center;"><label class="label-generique">{{vendu.produit.libelle}} - {{vendu.produit.type}}</label></td>
+                <td style="text-align: center;"><label class="label-generique">{{vendu.produit.libelle}} - {{vendu.produit.type}} -  - {{vendu.produit.taille}}</label></td>
                 <td style="text-align: center;"><label class="label-generique">{{vendu.dateVente | date: 'dd/MM/yyyy'}}</label></td>
                 <td style="text-align: center;"><label class="label-generique">{{vendu.quantite}}</label></td>
                 <td style="text-align: center;"><label class="label-generique">{{vendu.prixUnitaire}}</label></td>
@@ -70,7 +70,7 @@
                 <td>
                   <select class="input-field" name="produitSelect" id="produitSelect">
                     <option value="" selected>Choisir le produit </option>
-                    <option *ngFor="let produit of this.sharedService._prduitAll" value="{{produit.id}}">{{produit.libelle}} - {{produit.type}}</option>
+                    <option *ngFor="let produit of this.sharedService._prduitAll" value="{{produit.id}}">{{produit.libelle}} - {{produit.type}} - {{produit.taille}}</option>
                   </select> 
                 </td>
               </tr>

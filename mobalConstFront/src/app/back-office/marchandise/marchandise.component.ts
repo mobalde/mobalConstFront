@@ -26,17 +26,6 @@ export class MarchandiseComponent implements OnInit {
     this.sharedService.displayHeader('pageMarchandise');
   }
 
-  // calculTSacVendu_1(event: any){
-  //   if(this.marchandise.nbSacAnterieur >= 0 ) {
-  //     this.marchandise.totalSacVendu = +this.marchandise.nbSacAnterieur + +event.target.value;
-  //   }
-  //   this.calculTotalSacRestant();
-  // }
-
-  // calculTotalSacRestant(){
-  //   this.marchandise.totalSacRestant = +this.marchandise.totalSacMarchandise - +this.marchandise.totalSacVendu;
-  // }
-
   valider(){
     $('.modal').modal('toggle');
     if(this.marchandise.dateDebut === undefined) {
