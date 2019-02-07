@@ -5,5 +5,4 @@ export class Produit{
     type: String;
     libelleEnum: String;
     tailleProduitEnum: String;
-    taille: String;
 }

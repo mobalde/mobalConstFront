@@ -24,14 +24,24 @@ import { BanqueComponent } from './back-office/banque/banque.component';
 import { MarchandiseComponent } from './back-office/marchandise/marchandise.component';
 import { BilanCompteComponent } from './back-office/bilan-compte/bilan-compte.component';
 import { ErrorPageComponent } from './back-office/error/error-page.component';
+import { ProduitComponent } from './back-office/produit/produit.component';
+import { AjoutProduitComponent } from './back-office/produit/ajout-produit.component';
 
 const appRoute: Routes = [
         { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
         { path: 'banque', component: BanqueComponent, canActivate: [AuthGuardService]},
         { path: 'marchandise', component: MarchandiseComponent, canActivate: [AuthGuardService]},
         { path: 'bilanCompte', component: BilanCompteComponent, canActivate: [AuthGuardService]},
+        { path: 'produit', 
+          component: ProduitComponent, 
+          children: [
+            {
+                path:'ajoutProduit',
+                component: AjoutProduitComponent
+            }],
+          canActivate: [AuthGuardService]},
         { path: 'error', component: ErrorPageComponent},
-        { path: '', component: LoginComponent },
+        { path: '**', component: LoginComponent },
 ]; 
 
 @NgModule({
@@ -43,7 +53,9 @@ const appRoute: Routes = [
     BanqueComponent,
     MarchandiseComponent,
     BilanCompteComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    ProduitComponent,
+    AjoutProduitComponent
   ],
   imports: [
     BrowserModule,

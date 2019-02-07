@@ -31,6 +31,9 @@ export class HomeComponent implements OnInit {
         case 'marchandise':
           this.router.navigate(['marchandise']);
         break;
+        case 'produit':
+          this.router.navigate(['produit']);
+        break;
       }
     } 
     
