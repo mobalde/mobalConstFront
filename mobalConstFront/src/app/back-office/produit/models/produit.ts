@@ -4,5 +4,4 @@ export class Produit{
     quantiteCommande: Number;
     type: String;
     libelleEnum: String;
-    tailleProduitEnum: String;
 }

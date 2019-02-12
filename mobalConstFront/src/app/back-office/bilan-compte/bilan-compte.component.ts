@@ -32,7 +32,6 @@ export class BilanCompteComponent implements OnInit {
 
   ngOnInit() {
     this.sharedService.displayHeader('pagebilanCompte');
-    // this.getMarchandise('ciment');
   }
 
   openPopin(elements: String){
@@ -119,16 +118,6 @@ export class BilanCompteComponent implements OnInit {
     $('#popin').modal('toggle');
     this.venteASupp = null;
   }
-
-  // getMarchandise(libelle: String){
-  //   this.produitService.getProduit(libelle).subscribe(
-  //     data => {
-  //       this.produit = data;
-  //     }, err => {
-  //       console.log("_____ error: ",err);
-  //     }
-  //   );
-  // }
  
   activeBouton(){
     if(this.listeVente.length === 0) {

@@ -66,11 +66,11 @@ export class BanqueComponent implements OnInit {
     if(!this.venteSemaine.totalVente){
       $('#semainevente').css('border', '1px solid red');
     }
-    else if(!this.banque.dateDepot){
+    else if(!this.banque.dateOperation){
       $('#semainevente').css('border', '1px solid #808080ad');
       $('#datedepot').css('border', '1px solid red');
     }
-    else if(!this.banque.argentDepose){
+    else if(!this.banque.somme){
       $('#argentdepose').css('border', '1px solid #808080ad');
       $('#argentdepose').css('border', '1px solid red');
     } 

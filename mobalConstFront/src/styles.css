@@ -12,7 +12,7 @@
 .contents {
     margin-top: 87px;
 }
-.btn-warningue, .btn-primere, .btn-successe{
+.btn-warningue, .btn-primere, .btn-successe, .btn-successe-bis{
     color: #fff;
 }
 .btn-primere{
@@ -20,6 +20,10 @@
 }
 .btn-successe{
     background-color: #0c9e58;
+}
+.btn-successe-bis{
+    background-color: #4CAF50;
+    font-weight: bold;
 }
 .btn-warningue{
     background-color: #9e580c

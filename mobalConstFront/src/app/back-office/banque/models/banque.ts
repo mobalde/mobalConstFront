@@ -1,9 +1,9 @@
 export class Banque{
     id: Number;
-	dateDepot: Date;
-	agenceDepot: String;
+	dateOperation: Date;
+	agence: String;
 	numeroTicket: String;
-	argentDepose: Number;
+	somme: Number;
 	total: Number;
 	isDepot: boolean;
 	isRetrait: boolean;
