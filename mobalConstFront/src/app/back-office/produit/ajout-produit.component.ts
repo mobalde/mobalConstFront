@@ -3,6 +3,7 @@ import { RouterModule, Router, ActivatedRoute, Params } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Produit } from './models/produit';
 import { ProduitsService } from './async-services/produits.services';
+import { TypeEnum } from './models/type.enum';
 
 declare var $: any;
 
@@ -77,8 +78,10 @@ export class AjoutProduitComponent implements OnInit {
 
   valider(){
     // save to produit
+    this.setTypeProduit(this.produit.type);
     this.produitService.saveProduit(this.produit).subscribe(
       data => {
+        $('#popin').modal('toggle');
         if(data){
           alert("produit ajouté!");
           this.router.navigate(['produit']);
@@ -87,6 +90,29 @@ export class AjoutProduitComponent implements OnInit {
         }
       }
     );
+  }
+
+  setTypeProduit(type: String){
+    switch(type){
+      case 'ciment GI 32.5':
+        this.produit.type = TypeEnum.gi_32.toString();
+      break;
+      case 'ciment DIAMOND 32.5':
+        this.produit.type = TypeEnum.diam_32.toString();
+      break;
+      case 'ciment GI 42.5':
+        this.produit.type = TypeEnum.gi_42.toString();
+      break;
+      case 'ciment DIAMOND 42.5':
+        this.produit.type = TypeEnum.diam_42.toString();
+      break;
+      case 'basket ball Puma':
+        this.produit.type = TypeEnum.pum.toString();
+      break;
+      case 'autre':
+        this.produit.type = TypeEnum.autre.toString();
+      break;
+    }
   }
 
 }

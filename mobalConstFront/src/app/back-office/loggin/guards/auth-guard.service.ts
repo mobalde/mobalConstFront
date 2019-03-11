@@ -4,19 +4,18 @@ import { SharedService } from './../../../shared/shared.service';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 
 @Injectable()
-export class AuthGuardService implements CanActivate{
+export class AuthGuardService implements CanActivate, CanActivateChild{
 
     
     constructor(private router: Router, private http: Http, private sharedService: SharedService, private loginService: LoginService) {
     }
     canActivate (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         let user = JSON.parse(localStorage.getItem('currentUser'));
-        // this.timeOut(state);
         if(user !== null){
             return this.http.get(this.sharedService.getApi('currentUser/'+user.email), this.sharedService.options)
             .map((res: Response) => {
@@ -44,6 +43,12 @@ export class AuthGuardService implements CanActivate{
             return Observable.of(false);
         }
     }
+
+    canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        console.log('_____________ canAc-child');
+        this.router.navigate(['']);
+        return true;
+      }  
 
     deleteCurrUser(){
         localStorage.removeItem('currentUser');

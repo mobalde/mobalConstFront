@@ -34,12 +34,13 @@ const appRoute: Routes = [
         { path: 'bilanCompte', component: BilanCompteComponent, canActivate: [AuthGuardService]},
         { path: 'produit', 
           component: ProduitComponent, 
+          canActivate: [AuthGuardService],
           children: [
             {
                 path:'ajoutProduit',
                 component: AjoutProduitComponent
-            }],
-          canActivate: [AuthGuardService]},
+            }]
+          },
         { path: 'error', component: ErrorPageComponent},
         { path: '**', component: LoginComponent },
 ]; 
