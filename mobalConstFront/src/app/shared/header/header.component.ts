@@ -25,20 +25,20 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(localStorage.getItem('currentUser') !== null){
+    if(sessionStorage.getItem('currentUser') !== null){
       this.sharedService.getProduitAll();
     }
   }
 
   ngAfterContentChecked(){
-    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.user = JSON.parse(sessionStorage.getItem('currentUser'));
   }
 
   deconnexion(){
     this.loginService.logout().subscribe(
       data => {
-          if(localStorage.getItem('currentUser') !== null){
-            localStorage.removeItem('currentUser');
+          if(sessionStorage.getItem('currentUser') !== null){
+            sessionStorage.clear();
           }
           this.router.navigate(['']);
       }, error => {

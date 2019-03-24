@@ -11,14 +11,14 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 })
 export class HomeComponent implements OnInit {
 
-  user : User = JSON.parse(localStorage.getItem('currentUser'));
+  user : User = JSON.parse(sessionStorage.getItem('currentUser'));
   constructor(private sharedService: SharedService,private route: ActivatedRoute, private router: Router, private http: Http) {
    }
 
   ngOnInit() {
     this.sharedService.displayHeader('pagehome');
   }
-
+  
   navigation(page){
     if (this.user !== null) {
       switch(page){

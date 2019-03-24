@@ -14,6 +14,7 @@ import { RouterModule, Routes, Params } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import {APP_BASE_HREF} from '@angular/common';
 import { AppComponent } from './app.component';
@@ -42,14 +43,14 @@ const appRoute: Routes = [
             }]
           },
         { path: 'error', component: ErrorPageComponent},
-        { path: '**', component: LoginComponent },
+        { path: '', component: LoginComponent },
 ]; 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     HomeComponent,
+    LoginComponent,
     HeaderComponent,
     BanqueComponent,
     MarchandiseComponent,
@@ -62,6 +63,7 @@ const appRoute: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     NgbModule,
     RouterModule.forRoot(appRoute)
   ],

@@ -1,3 +1,4 @@
+import { SharedService } from 'src/app/shared/shared.service';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute, Params } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
@@ -20,9 +21,10 @@ export class AjoutProduitComponent implements OnInit {
   marqueField: String[];
 
   constructor(private route: ActivatedRoute, private router: Router, 
-              private http: Http, private produitService: ProduitsService) { }
+              private http: Http, private produitService: ProduitsService, private sharedService: SharedService) { }
 
   ngOnInit() {
+    this.sharedService.displayHeader('pageAjoutProduit');
     this.getLibelles();
     this.getMarques();
   }

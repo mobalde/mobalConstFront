@@ -18,6 +18,7 @@ export class ProduitComponent implements OnInit {
               private router: Router, private http: Http, private produitService: ProduitsService) { }
 
   ngOnInit() {
+    this.sharedService.displayHeader('pageProduit');
   }
 
 }

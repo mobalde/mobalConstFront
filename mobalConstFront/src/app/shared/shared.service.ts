@@ -13,7 +13,7 @@ import { Produit } from '../back-office/produit/models/produit';
 @Injectable()
 export class SharedService {
     private _apiPrefixUrl = 'http://localhost:8080'; // url prefix
-    private _apiPrexixDomain = '/mobalc'; // url suffixe for webservice back
+    private _apiPrefixDomain = '/mobalc'; // url suffixe for webservice back
     public options = new RequestOptions({ headers: this.createHeaders(), withCredentials: true});    
     //public optionsForPDF = new RequestOptions({ headers: this.createHeaders(), withCredentials: true, responseType: ResponseContentType.Blob });
 
@@ -45,7 +45,7 @@ export class SharedService {
         return headers;
     }
     private get _apiUrl() {
-        return this._apiPrefixUrl + this._apiPrexixDomain;
+        return this._apiPrefixUrl + this._apiPrefixDomain;
     }
     public getApi(api: string): string {
         return this._apiUrl + '/' + api;

@@ -9,13 +9,13 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 
 @Injectable()
-export class AuthGuardService implements CanActivate, CanActivateChild{
-
+export class AuthGuardService implements CanActivate{
     
     constructor(private router: Router, private http: Http, private sharedService: SharedService, private loginService: LoginService) {
     }
     canActivate (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        let user = JSON.parse(localStorage.getItem('currentUser'));
+        let user = JSON.parse(sessionStorage.getItem('currentUser'));
+        console.log('______________ user: ',user);
         if(user !== null){
             return this.http.get(this.sharedService.getApi('currentUser/'+user.email), this.sharedService.options)
             .map((res: Response) => {
@@ -44,14 +44,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild{
         }
     }
 
-    canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        console.log('_____________ canAc-child');
-        this.router.navigate(['']);
-        return true;
-      }  
-
     deleteCurrUser(){
-        localStorage.removeItem('currentUser');
-        localStorage.removeItem('temps');
+        sessionStorage.clear();
     }
 }

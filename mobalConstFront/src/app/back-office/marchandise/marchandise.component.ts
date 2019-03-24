@@ -71,7 +71,8 @@ export class MarchandiseComponent implements OnInit {
         this.marchandise = data;
         if(+data.nbSacVendu > 0){
           this.marchandise.totalSacMarchandise = this.produit.quantiteCommande;
-          this.marchandise.totalSacVendu = +this.marchandise.nbSacAnterieur + +this.marchandise.nbSacVendu;
+          // this.marchandise.totalSacVendu = +this.marchandise.nbSacAnterieur + +this.marchandise.nbSacVendu;
+          this.marchandise.totalSacVendu = +this.marchandise.nbSacVendu;
           this.marchandise.totalSacRestant = +this.marchandise.totalSacMarchandise - +this.marchandise.totalSacVendu;
           this.marchandise.produitDto = this.produit;
           this.isDisplayBloc = true;
