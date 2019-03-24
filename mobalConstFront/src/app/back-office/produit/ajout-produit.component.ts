@@ -1,3 +1,4 @@
+import { LibellesEnum } from './models/libelles-enum';
 import { SharedService } from 'src/app/shared/shared.service';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute, Params } from '@angular/router';
@@ -81,6 +82,7 @@ export class AjoutProduitComponent implements OnInit {
   valider(){
     // save to produit
     this.setTypeProduit(this.produit.type);
+    
     this.produitService.saveProduit(this.produit).subscribe(
       data => {
         $('#popin').modal('toggle');
@@ -98,21 +100,27 @@ export class AjoutProduitComponent implements OnInit {
     switch(type){
       case 'ciment GI 32.5':
         this.produit.type = TypeEnum.gi_32.toString();
+        this.produit.libelleEnum = LibellesEnum.ciment.toString();
       break;
       case 'ciment DIAMOND 32.5':
         this.produit.type = TypeEnum.diam_32.toString();
+        this.produit.libelleEnum = LibellesEnum.ciment.toString();
       break;
       case 'ciment GI 42.5':
         this.produit.type = TypeEnum.gi_42.toString();
+        this.produit.libelleEnum = LibellesEnum.ciment.toString();
       break;
       case 'ciment DIAMOND 42.5':
         this.produit.type = TypeEnum.diam_42.toString();
+        this.produit.libelleEnum = LibellesEnum.ciment.toString();
       break;
       case 'basket ball Puma':
         this.produit.type = TypeEnum.pum.toString();
+        this.produit.libelleEnum = LibellesEnum.basket.toString();
       break;
       case 'autre':
         this.produit.type = TypeEnum.autre.toString();
+        this.produit.libelleEnum = LibellesEnum.autre.toString();
       break;
     }
   }

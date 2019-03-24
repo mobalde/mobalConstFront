@@ -54,6 +54,8 @@ export class MarchandiseComponent implements OnInit {
   onChange(values: String){
     if(values !== ''){
       this.produit = this.sharedService._prduitAll.find(produit => produit.type === values);
+      console.log('____________ ciment: ',this.produit);
+      console.log('____________ produit_All: ',this.sharedService._prduitAll);
       if(this.produit.libelleEnum === 'CIMENT'){
         this.getCalculeNombreSacVendu(this.produit.id, values);
       } else {

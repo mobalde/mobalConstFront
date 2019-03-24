@@ -22,17 +22,9 @@ export class BanqueService{
         });
     }
 
-    postVenteSemaine(venteSem: VenduInBanque){
-        const data = JSON.stringify(venteSem);
-        return this.http.post(this.sharedService.getApi('save/venteSemaine/'), data, this.sharedService.options)
-            .timeout(60000)
-            .map((res: Response) => res.json())
-            .catch((error: Response | any): any => {
-                if(error.status === 403){
-                    this.sharedService.displayError('errorConnexion');
-                    Observable.throw(error);
-                }
-            });
+    postVenteSemaine(venteSemaine: VenduInBanque){
+        const data = JSON.stringify(venteSemaine);
+        return this.http.post(this.sharedService.getApi('save/venteSemaine/'), data, this.sharedService.options);
     }
 
     getSoldeAnterieur(id: Number): Observable<Number>{
