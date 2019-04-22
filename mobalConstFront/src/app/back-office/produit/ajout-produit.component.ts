@@ -88,6 +88,7 @@ export class AjoutProduitComponent implements OnInit {
         $('#popin').modal('toggle');
         if(data){
           alert("produit ajouté!");
+          this.sharedService.getProduitAll();
           this.router.navigate(['produit']);
         } else{
           alert("erreur d'ajout produit!");

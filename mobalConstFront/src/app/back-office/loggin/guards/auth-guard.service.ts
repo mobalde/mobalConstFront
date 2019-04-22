@@ -15,7 +15,6 @@ export class AuthGuardService implements CanActivate{
     }
     canActivate (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         let user = JSON.parse(sessionStorage.getItem('currentUser'));
-        console.log('______________ user: ',user);
         if(user !== null){
             return this.http.get(this.sharedService.getApi('currentUser/'+user.email), this.sharedService.options)
             .map((res: Response) => {

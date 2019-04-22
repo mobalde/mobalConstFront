@@ -4,4 +4,6 @@ export class Produit{
     quantiteCommande: Number;
     type: String;
     libelleEnum: String;
+    dateAchat: Date;
+    montant: Number;
 }

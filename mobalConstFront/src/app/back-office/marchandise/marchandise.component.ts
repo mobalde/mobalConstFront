@@ -44,6 +44,7 @@ export class MarchandiseComponent implements OnInit {
           this.marchandise = data;
           this.sharedService.afficheAlerte('alert-success', 'class');
           this.isDisplayBloc = false;
+          this.sharedService.getProduitAll();
         }, err => {
           console.log("_____ error: ",err);
         }
@@ -54,8 +55,6 @@ export class MarchandiseComponent implements OnInit {
   onChange(values: String){
     if(values !== ''){
       this.produit = this.sharedService._prduitAll.find(produit => produit.type === values);
-      console.log('____________ ciment: ',this.produit);
-      console.log('____________ produit_All: ',this.sharedService._prduitAll);
       if(this.produit.libelleEnum === 'CIMENT'){
         this.getCalculeNombreSacVendu(this.produit.id, values);
       } else {
@@ -73,7 +72,6 @@ export class MarchandiseComponent implements OnInit {
         this.marchandise = data;
         if(+data.nbSacVendu > 0){
           this.marchandise.totalSacMarchandise = this.produit.quantiteCommande;
-          // this.marchandise.totalSacVendu = +this.marchandise.nbSacAnterieur + +this.marchandise.nbSacVendu;
           this.marchandise.totalSacVendu = +this.marchandise.nbSacVendu;
           this.marchandise.totalSacRestant = +this.marchandise.totalSacMarchandise - +this.marchandise.totalSacVendu;
           this.marchandise.produitDto = this.produit;
