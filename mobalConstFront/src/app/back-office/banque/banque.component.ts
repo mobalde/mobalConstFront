@@ -85,13 +85,14 @@ export class BanqueComponent implements OnInit {
 
   valider(){
     this.banque.soldeAnterieur = this.soldeAnt;
+    this.banque.motif = 'VENTE_MARCHANDISE';
     this.venteSemaine.banqueDto = this.banque;
     this.venteSemaine.depotBanque = true;
     this.banqueService.postVenteSemaine(this.venteSemaine).subscribe(
       data => {
-        setTimeout( () => { 
-          location.reload();
-         }, 1000 );
+        // setTimeout( () => { 
+        //   location.reload();
+        //  }, 1000 );
          $('#popin').modal('toggle');
          this.sharedService.afficheAlerte('alert-success', 'class');
       },

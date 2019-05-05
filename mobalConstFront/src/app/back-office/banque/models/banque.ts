@@ -8,4 +8,5 @@ export class Banque{
 	isDepot: boolean;
 	isRetrait: boolean;
 	soldeAnterieur: Number;
+	motif: String;
 }
