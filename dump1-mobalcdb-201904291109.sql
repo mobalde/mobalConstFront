@@ -804,7 +804,7 @@ INSERT INTO public.banque VALUES (5, '2019-04-14 13:09:50.361', '2019-04-14 13:0
 INSERT INTO public.banque VALUES (6, '2019-04-14 13:10:54.251', '2019-04-14 13:10:54.251', 0, '2019-03-24', NULL, 'N/A', 1960000, 0, NULL, true, false, 6, false, 'vente marchandise', NULL);
 INSERT INTO public.banque VALUES (7, '2019-04-14 13:11:30.807', '2019-04-14 13:11:30.807', 0, '2019-02-10', NULL, 'N/A', 204000, 0, NULL, true, false, 7, false, 'vente marchandise', NULL);
 INSERT INTO public.banque VALUES (8, '2019-04-22 15:55:27.786', '2019-04-22 15:55:27.786', 0, '2019-04-18', 'Kipé', 'N/A', 0, 0, 13300000, false, false, NULL, true, 'ACHAT_MARCHANDISE', 3);
-INSERT INTO public.banque VALUES (10, '2019-04-22 15:55:27.786', '2019-04-22 15:55:27.786', 0, '2019-04-14', 'Kipé', 'N/A', 0, 0, 49700000, false, false, 2, true, 'ACHAT_MARCHANDISE', 4);
+INSERT INTO public.banque VALUES (10, '2019-04-22 15:55:27.786', '2019-04-22 15:55:27.786', 0, '2019-04-14', 'Kipé', 'N/A', 0, 0, 49700000, false, false, NULL, true, 'ACHAT_MARCHANDISE', 4);
 
 
 --
