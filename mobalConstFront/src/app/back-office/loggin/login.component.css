@@ -1,0 +1,11 @@
+input{
+    padding-left:4px;
+}
+.title{
+    margin-bottom:1.5rem;
+    color: #0c529e;
+    font-weight: 400;
+}
+.error{
+    color: red;
+}

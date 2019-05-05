@@ -1,0 +1,116 @@
+<div class="row">
+  <div class="col-lg-1 col-md-1 col-xl-1"></div>
+  <div class="col-12 col-md-10  col-sm-12 col-lg-10 col-xl-10 bloc-contenu">
+    <h2 class="title">Bilan du compte de la semaine</h2>
+    <div class="blocPrincipal">
+      <form method="post">
+        <div class="form-row">
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col">
+              <button class="btn btn-primere" (click)="openPopin('A')">Ajouter</button>
+          </div>
+          <div class="col">
+              <button [disabled]="isActif" [ngClass]="getClass()" (click)="openPopin('V')">Valider</button>
+          </div>
+          <div class="col"></div>
+          <div class="col"></div>
+        </div>
+        <div class="form-row">
+          <table class="table table-striped input-field-bc">
+            <thead *ngIf="isAffiche">
+              <tr>
+                <th><strong>Action</strong></th>
+                <th><strong>Produit</strong></th>
+                <th><strong>Date</strong></th>
+                <th><strong>Quantite</strong></th>
+                <th><strong>Prix unitaire</strong></th>
+                <th><strong>Total</strong></th>
+              </tr>
+            </thead>
+            <tbody class="tableBody" *ngIf="this.listeVente.length > 0">
+              <tr *ngFor="let vendu of this.listeVente; let i = index">
+                <td style="text-align: center; cursor:pointer;">
+                  <img src="../../../assets/remove-icone.png" width="30" height="30" title="supprimer" (click)="supprimer(i, vendu)">
+                </td>
+                <td style="text-align: center;"><label class="label-generique">{{vendu.produit.libelle}} - {{vendu.produit.type}}</label></td>
+                <td style="text-align: center;"><label class="label-generique">{{vendu.dateVente | date: 'dd/MM/yyyy'}}</label></td>
+                <td style="text-align: center;"><label class="label-generique">{{vendu.quantite}}</label></td>
+                <td style="text-align: center;"><label class="label-generique">{{vendu.prixUnitaire}}</label></td>
+                <td style="text-align: center;"><label class="label-generique">{{vendu.total}}</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </form>
+    </div>
+    <!-- Alert reponse -->
+    <div class="alert alert-success" role="alert" style="display:none;">
+        <strong>Le bilan de la semaine a éte ajouté</strong>
+    </div>
+    <div class="alert alert-warning" role="alert" style="display:none;">
+        <strong>Le bilan de la semaine n'a pas éte ajouté</strong>
+    </div>
+  </div>
+  <div class="col-lg-1 col-md-1 col-xl-1"></div>
+</div>
+
+<!-- Modal ajout vente -->
+<div class="modal fade" id="popinAjout" role="dialog" tableindex="-1" aria-labelledby="popinModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Ajouter un nouveau bilan</h5>
+        </div>
+        <div class=" row modal-body">
+          <div class="col-12 col-md-12 col-sm-12 col-lg-12 col-xl-12">
+            <table>
+              <tr>
+                <td class="libeller">Produit</td>
+                <td>
+                  <select class="input-field" name="produitSelect" id="produitSelect">
+                    <option value="" selected>Choisir le produit </option>
+                    <option *ngFor="let produit of this.sharedService._prduitAll" value="{{produit.id}}">{{produit.libelle}} - {{produit.type}}</option>
+                  </select> 
+                </td>
+              </tr>
+              <tr>
+                <td class="libeller">Date vente* :</td>
+                <td><input type="Date" name="dateVente" class="input-field dateVente" [(ngModel)]="vendu.dateVente"></td>
+              </tr>
+              <tr>
+                  <td class="libeller">Quantite* : </td>
+                  <td><input type="text" name="quantite" class="input-field quantite" [(ngModel)]="vendu.quantite"></td>
+              </tr>
+              <tr>
+                  <td class="libeller">Prix unitaire* :</td>
+                  <td><input type="text" name="prixUnitaire" class="input-field prxUnitaire" [(ngModel)]="vendu.prixUnitaire"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn-large" data-dismiss="modal" aria-label="close">Annuler</button>
+          <button type="button" class="btn btn-success btn-large" (click)="add()">Valider</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal Confirmation enregistrement et suppression -->
+<div class="modal fade" id="popin" role="dialog" tableindex="-1" aria-labelledby="popinModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmation</h5>
+        </div>
+        <div class="modal-body">
+            <label>{{this.message}}</label>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-large" data-dismiss="modal" aria-label="close">Non</button>
+            <button type="button" class="btn btn-success btn-large" (click)="valider()">Oui</button>
+        </div>
+      </div>
+    </div>
+  </div>

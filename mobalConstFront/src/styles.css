@@ -1,4 +1,97 @@
 /* You can add global styles to this file, and also import other style files */
-h1{
+.form-group .aligntextright{
+    text-align: right;
+}
+.form-group .aligntextleft{
+    text-align: left;
+}
+.modal-title{
+    margin: 0 auto;
+    color: blue;
+}
+.contents {
+    margin-top: 87px;
+}
+.btn-warningue, .btn-primere, .btn-successe, .btn-successe-bis{
+    color: #fff;
+}
+.btn-primere{
+    background-color: #0c529e;
+}
+.btn-successe{
+    background-color: #0c9e58;
+}
+.btn-successe-bis{
+    background-color: #4CAF50;
+    font-weight: bold;
+}
+.btn-warningue{
+    background-color: #9e580c
+}
+h1, h2{
+    text-align: center !important;
+}
+.total label, .total span{
+    font-weight: bold;
+    margin-bottom: 1.4rem;
+}
+.position-right{
+    float: right;
+}
+.filed-input input, .filed-input select{
+    width: 15em;
+    padding-left: 3px;
+}
+.btn_left{
+    float:right;
+}
+.blocPrincipal button{
+    width: 100%;
+    margin-bottom:15px;
+    font-size: 18px;
+}
+/* .blocPrincipal{
+    margin-top:10px;
+} */
+.title{
+    margin-bottom: 1em;
+    color: #0c529e;
+    margin-top: 9px;
+}
+.input-field-bc input{
+    width: 11.70em;
+}
+.input-field-bc th{
     text-align: center;
+}
+.alert{
+    text-align: center;
+}
+.modal-body .contenu{
+    text-align: center;
+}
+@media (min-width: 993px){
+    .blocPrincipal .label-generique{
+        font-family: arial;
+        font-size: 18px;
+    }
+    .bloc-contenu{
+        /* border: 1px solid #80808029; */
+        /* padding-top: 10px; */
+        /* padding-bottom: 12px; */
+        background: #e7f1fd;
+    }
+}
+@media (min-width: 769px) and (max-width: 992px){
+}
+@media (min-width: 577px) and (max-width: 768px){
+}
+@media (max-width: 576px){
+    h2{
+        font-size: 1.6rem !important;
+    }
+    .total label, .total span{
+        font-size: 1.3rem;
+        color: #9e0c52;
+    }
 }

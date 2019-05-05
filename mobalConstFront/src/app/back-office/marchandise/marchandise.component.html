@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="col-md-3 col-lg-3 col-xl-3"></div>
+  <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 bloc-contenu">
+    <h2 class="title">Gestion Marchandise</h2>
+    <div class="blocPrincipal">
+        <form method="post" class="form-horizontal filed-input">
+            <div class="form-group">
+                <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="produit">Produit: </label>
+                <select class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" name="libelle" id="produit" style="height: 32px;" (change)="onChange($event.target.value)">
+                  <option value="" selected>Choisir le produit</option>
+                  <option *ngFor="let produit of this.sharedService._prduitAll" value="{{produit.type}}">{{produit.libelle}} - {{produit.type}}</option>
+                </select>
+            </div>
+            <div *ngIf="this.isDisplayBloc">
+                <div class="form-group">
+                    <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="datedebut">Date debut:</label>
+                    <input class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7 dateDebut" type="date" [ngModel]="marchandise.dateDebut | date: 'yyyy-MM-dd'" name="dateDebut" id="datedebut">
+                </div>
+                <div class="form-group">
+                    <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="datefin">Date fin:</label>
+                    <input class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" type="date" [ngModel]="marchandise.dateFin | date: 'yyyy-MM-dd'" id="datefin" name="dateFin">
+                </div>
+                <div class="form-group">
+                  <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="nbsacvendu">Sac vendu:</label>
+                  <input class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" [disabled]="true" type="text" name="nbSacVendu" [(ngModel)]="marchandise.nbSacVendu" id="nbsacvendu" placeholder=" Nombre de sac vendu par semaine">
+                </div>
+                <!-- <div class="form-group">
+                  <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="nbsacanterieur">Sac anterieur vendu:</label>
+                  <input class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" [disabled]="true" type="text" name="nbSacAnterieur" [(ngModel)]="marchandise.nbSacAnterieur" id="nbsacanterieur" placeholder=" Nombre de sac anterieur vendu">
+                </div> -->
+                <div class="form-group">
+                  <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="totalsacvendu">Total sac vendu:</label>
+                  <input class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" [disabled]="true" type="text" name="totalSacVendu" [(ngModel)]="marchandise.totalSacVendu" id="totalsacvendu" placeholder=" Total sac vendu">
+                </div>
+                <div class="form-group">
+                  <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="totalsacmarchandise">Total sac marchandise:</label>
+                  <input class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" [disabled]="true" type="text" name="totalSacMarchandise" [(ngModel)]="marchandise.totalSacMarchandise" placeholder=" Total sac marchandise">
+                </div>
+                <div class="form-group total">
+                  <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="total">Total:</label>
+                  <label class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" for="vtotal">{{marchandise.totalSacRestant}}</label>
+                </div>
+                <div class="form-row">
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"><button type="button" class="btn btn-successe" data-toggle="modal" data-target="#popin">Valider</button></div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Alert reponse -->
+    <div class="alert alert-success" role="alert" style="display:none;">
+        <strong>La marchandise a éte ajouté</strong>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-3 col-lg-3 col-xl-3"></div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="popin" role="dialog" tableindex="-1" aria-labelledby="popinModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="contenu">
+            <label>Voulez-vous sauvegarder vos données ?</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-large" (click)="valider()">Oui</button>
+          <button type="button" class="btn btn-danger btn-large" data-dismiss="modal" aria-label="close">Non</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,25 +1,7 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 col-xs-12 col-lg-12">
-            <div class="title">
-                <h3>
-                  {{ title }}
-                </h3>
-            </div>
-            <form>
-                <div class="form-group">
-                    <input type="text" placeholder="Identifiant" style="padding-left:4px">
-                </div>
-                <div class="form-group">
-                    <input type="password" placeholder="Mot de passe" style="padding-left:4px">
-                </div>
-                <button class="btn btn-primary">Connexion</button>
-            </form>
-        </div>
-      </div>
+<div class="headers">
+    <app-header></app-header>
 </div>
-
-
-
+<div class="contents">
+  <router-outlet></router-outlet>
+</div>
 
