@@ -20,26 +20,34 @@
           <table class="table table-striped input-field-bc">
             <thead *ngIf="isAffiche">
               <tr>
-                <th><strong>Action</strong></th>
                 <th><strong>Produit</strong></th>
                 <th><strong>Date</strong></th>
                 <th><strong>Quantite</strong></th>
                 <th><strong>Prix unitaire</strong></th>
                 <th><strong>Total</strong></th>
+                <th><strong>Action</strong></th>
               </tr>
             </thead>
             <tbody class="tableBody" *ngIf="this.listeVente.length > 0">
               <tr *ngFor="let vendu of this.listeVente; let i = index">
-                <td style="text-align: center;"><label class="label-generique">{{vendu.produit.libelle}} - {{vendu.produit.type}}</label></td>
+                <!-- <td style="text-align: center;"><label class="label-generique">{{vendu.produit.libelle}} - {{vendu.produit.type}}</label></td> -->
+                <td style="text-align: center;">
+                  <select [disabled]="vendu.disabledInput" class="bilan-select input-field" 
+                          name="produitSelect" id="produitSelect" [(ngModel)]="vendu.produit"
+                          (ngModelChange)="onChange($event)">
+                    <option value="" selected>Choisir le produit </option>
+                    <option *ngFor="let produit of this.sharedService._prduitAll" [ngValue]="produit">{{produit.libelle}} - {{produit.type}}</option>
+                  </select>
+                </td>
                 <td style="text-align: center;"><label class="label-generique">{{vendu.dateVente | date: 'dd/MM/yyyy'}}</label></td>
                 <td style="text-align: center;"><label class="label-generique">{{vendu.quantite}}</label></td>
                 <td style="text-align: center;"><label class="label-generique">{{vendu.prixUnitaire}}</label></td>
                 <td style="text-align: center;"><label class="label-generique">{{vendu.total}}</label></td>
                 <td style="text-align: center; cursor:pointer;">
-                  <img src="../../../assets/remove-icone.png" width="30" height="30" title="supprimer" (click)="supprimer(i, vendu)">
-                  <img src="../../../assets/pencil.png" width="30" height="30" title="modifier" (click)="modifier(i, vendu)">
-                  <img src="../../../assets/check.png" width="30" height="30" title="valider" (click)="valider(i, vendu)">
-                  <img src="../../../assets/close.png" width="30" height="30" title="annuler" (click)="annuler(i)">
+                  <img class="remove" [ngClass]="{'btn-pencil-reomve': vendu.modif===false}" src="../../../assets/remove-icone.png" width="30" height="30" title="supprimer" (click)="supprimer(i, vendu)">
+                  <img class="pencil" [ngClass]="{'btn-pencil-reomve': vendu.modif===false}" src="../../../assets/pencil.png" width="25" height="25" title="modifier" (click)="modifier(i, vendu)">
+                  <img class="check" [ngClass]="{'btn-check-close': vendu.modif===true}" src="../../../assets/check.png" width="28" height="27" title="valider" (click)="validerLesModif(i, vendu)">
+                  <img class="annuler-modif" [ngClass]="{'btn-check-close': vendu.modif===true}" src="../../../assets/remove-ic.png" width="30" height="30" title="annuler" (click)="annuler(i)">
                 </td>
               </tr>
             </tbody>
@@ -82,12 +90,12 @@
                 <td><input type="Date" name="dateVente" class="input-field dateVente" [(ngModel)]="vendu.dateVente"></td>
               </tr>
               <tr>
-                  <td class="libeller">Quantite* : </td>
-                  <td><input type="text" name="quantite" class="input-field quantite" [(ngModel)]="vendu.quantite"></td>
+                <td class="libeller">Quantite* : </td>
+                <td><input type="text" name="quantite" class="input-field quantite" [(ngModel)]="vendu.quantite"></td>
               </tr>
               <tr>
-                  <td class="libeller">Prix unitaire* :</td>
-                  <td><input type="text" name="prixUnitaire" class="input-field prxUnitaire" [(ngModel)]="vendu.prixUnitaire"></td>
+                <td class="libeller">Prix unitaire* :</td>
+                <td><input type="text" name="prixUnitaire" class="input-field prxUnitaire" [(ngModel)]="vendu.prixUnitaire"></td>
               </tr>
             </table>
           </div>

@@ -16,18 +16,13 @@ declare var $: any;
 export class BilanCompteComponent implements OnInit {
 
   vendu: Vendu = new Vendu();
-
   listeVente: Array<Vendu> = [];
-
   isAffiche: boolean = false;
   isActif: boolean = true;
-
   message: String = null;
-
   venteASupp: Vendu = null;
 
   constructor(private bilancompteService: BilancompteService, private sharedService: SharedService, private produitService: ProduitsService, private http: Http) { 
-
   }
 
   ngOnInit() {
@@ -61,6 +56,8 @@ export class BilanCompteComponent implements OnInit {
   constructListVente(){
       this.vendu.total = $('.prxUnitaire').val()*$('.quantite').val();
       this.vendu.produit = this.sharedService._prduitAll.find(produit => produit.id === +$('#produitSelect').val());
+      this.vendu.modif = true;
+      this.vendu.disabledInput = true;
       this.listeVente.push(this.vendu);
       this.vendu = new Vendu();
   }
@@ -129,4 +126,16 @@ export class BilanCompteComponent implements OnInit {
     }
   }
 
+  modifier(elements: Number, vendu: Vendu){
+    vendu.modif = false;
+    vendu.disabledInput = false;
+  }
+
+  validerLesModif(elements: Number, vendu: Vendu){
+    console.log("_________ vendu: ",vendu);
+  }
+
+  onChange(event){
+    
+  }
 }

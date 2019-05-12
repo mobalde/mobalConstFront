@@ -22,3 +22,16 @@
 .tableBody tr td{
     text-align:center;
 }
+.btn-pencil-reomve{
+    display: none;
+}
+.btn-check-close{
+    display:none;
+}
+.pencil{
+    margin-left: 10px;
+}
+.bilan-select{
+    padding-top: 4px;
+    padding-bottom: 5px;
+}

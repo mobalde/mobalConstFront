@@ -6,4 +6,6 @@ export class Vendu{
 	prixUnitaire: Number;
 	total: Number;
 	produit: Produit;
+	disabledInput: boolean;
+	modif: boolean;
 }
