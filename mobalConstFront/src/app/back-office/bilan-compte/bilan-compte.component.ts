@@ -21,6 +21,7 @@ export class BilanCompteComponent implements OnInit {
   isActif: boolean = true;
   message: String = null;
   venteASupp: Vendu = null;
+  venduLast: any[] = new Array();
 
   constructor(private bilancompteService: BilancompteService, private sharedService: SharedService, private produitService: ProduitsService, private http: Http) { 
   }
@@ -41,11 +42,15 @@ export class BilanCompteComponent implements OnInit {
 
   add(){
     // Add bilan dans la liste.
-    if($('.dateVente').val() === '' || $('.quantite').val() === '' || $('.prxUnitaire').val() === '' || $('#produitSelect').val() === ''){
+    if(
+          this.vendu.dateVente === undefined || this.vendu.quantite === undefined
+          || this.vendu.prixUnitaire === undefined
+          || this.vendu.produit === undefined ){
       this.colorEmptyInput();
     } else {
       $('#popinAjout').modal('toggle'); 
       this.constructListVente();
+      this.colorInitInput();
       if(!this.isAffiche){
         this.isAffiche = true;
         this.isActif = false;
@@ -53,9 +58,16 @@ export class BilanCompteComponent implements OnInit {
     }
   }
 
+  colorInitInput(){
+    $('#produitSelects').css('border', '1px solid #808080ad');
+    $('.quantites').css('border', '1px solid #808080ad');
+    $('.dateVentes').css('border', '1px solid #808080ad');
+    $('.prixUnitaires').css('border', '1px solid #808080ad');
+  }
+
   constructListVente(){
-      this.vendu.total = $('.prxUnitaire').val()*$('.quantite').val();
-      this.vendu.produit = this.sharedService._prduitAll.find(produit => produit.id === +$('#produitSelect').val());
+      this.vendu.total = +this.vendu.prixUnitaire*+this.vendu.quantite;
+      // this.vendu.produit = this.sharedService._prduitAll.find(produit => produit.id === +$('#produitSelects').val());
       this.vendu.modif = true;
       this.vendu.disabledInput = true;
       this.listeVente.push(this.vendu);
@@ -70,24 +82,27 @@ export class BilanCompteComponent implements OnInit {
   }
 
   colorEmptyInput(){
-    if($('#produitSelect').val() === ''){
-      $('#produitSelect').css('border', '1px solid red');
-    } else if(!this.vendu.dateVente){
-      $('.dateVente').css('border', '1px solid red');
-      $('#produitSelect').css('border', '1px solid #808080ad');
-    } else if (!this.vendu.quantite){
-      $('.dateVente').css('border', '1px solid #808080ad');
-      $('.quantite').css('border', '1px solid red');
-    } else if (!this.vendu.prixUnitaire){
-      $('.quantite').css('border', '1px solid #808080ad');
-      $('.dateVente').css('border', '1px solid #808080ad');
-      $('.prxUnitaire').css('border', '1px solid red');
-    } else {
-      $('#produitSelect').css('border', '1px solid #808080ad');
-      $('.quantite').css('border', '1px solid #808080ad');
-      $('.dateVente').css('border', '1px solid #808080ad');
-      $('.prxUnitaire').css('border', '1px solid #808080ad');
+
+    if(this.vendu.produit === undefined){
+      $('#produitSelects').css('border', '1px solid red');
+    } else{
+      $('#produitSelects').css('border', '1px solid #808080ad');
     }
+    if(this.vendu.dateVente === undefined){
+      $('.dateVentes').css('border', '1px solid red');
+    } else{
+      $('.dateVentes').css('border', '1px solid #808080ad');
+    }
+    if (this.vendu.quantite === undefined ){
+      $('.quantites').css('border', '1px solid red');
+    } else{
+      $('.quantites').css('border', '1px solid #808080ad');
+    }
+    if (this.vendu.prixUnitaire === undefined){
+      $('.prixUnitaires').css('border', '1px solid red');
+    } else{
+      $('.prixUnitaires').css('border', '1px solid #808080ad');
+    } 
   }
 
   getClass(){
@@ -127,15 +142,33 @@ export class BilanCompteComponent implements OnInit {
   }
 
   modifier(elements: Number, vendu: Vendu){
+    this.venduLast[+elements] = {
+      "prixUnitaire": +vendu.prixUnitaire,
+      "dateVente": vendu.dateVente,
+      "quantite" : vendu.quantite,
+      "total" : vendu.total,
+      "disabledInput" : vendu.disabledInput,
+      "modif" : vendu.modif
+    };
     vendu.modif = false;
     vendu.disabledInput = false;
   }
 
   validerLesModif(elements: Number, vendu: Vendu){
-    console.log("_________ vendu: ",vendu);
+    vendu.total = +vendu.prixUnitaire*+vendu.quantite;
+    vendu.modif = true;
+    vendu.disabledInput = true;
+    vendu.total = +vendu.prixUnitaire*+vendu.quantite;
+    this.listeVente[+elements] = vendu;
   }
 
-  onChange(event){
-    
+  annuler(vendu: Vendu, elements: Number){
+    vendu.dateVente = this.venduLast[+elements].dateVente;
+    vendu.prixUnitaire = this.venduLast[+elements].prixUnitaire
+    vendu.quantite = this.venduLast[+elements].quantite;
+    vendu.total = this.venduLast[+elements].total;
+    vendu.modif = this.venduLast[+elements].modif;
+    vendu.disabledInput = this.venduLast[+elements].disabledInput;
+    this.listeVente[+elements] = vendu;
   }
 }

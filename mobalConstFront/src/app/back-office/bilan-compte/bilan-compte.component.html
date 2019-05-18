@@ -33,21 +33,27 @@
                 <!-- <td style="text-align: center;"><label class="label-generique">{{vendu.produit.libelle}} - {{vendu.produit.type}}</label></td> -->
                 <td style="text-align: center;">
                   <select [disabled]="vendu.disabledInput" class="bilan-select input-field" 
-                          name="produitSelect" id="produitSelect" [(ngModel)]="vendu.produit"
+                          name="produitSelect{{i}}" id="produitSelect{{i}}" [(ngModel)]="vendu.produit"
                           (ngModelChange)="onChange($event)">
                     <option value="" selected>Choisir le produit </option>
                     <option *ngFor="let produit of this.sharedService._prduitAll" [ngValue]="produit">{{produit.libelle}} - {{produit.type}}</option>
                   </select>
                 </td>
-                <td style="text-align: center;"><label class="label-generique">{{vendu.dateVente | date: 'dd/MM/yyyy'}}</label></td>
-                <td style="text-align: center;"><label class="label-generique">{{vendu.quantite}}</label></td>
-                <td style="text-align: center;"><label class="label-generique">{{vendu.prixUnitaire}}</label></td>
+                <td style="text-align: center;">
+                  <input [disabled]="vendu.disabledInput" type="date" name="dateVente{{i}}" class="input-field dateVente" [(ngModel)]="vendu.dateVente" value="vendu.dateVente | date: 'dd/MM/yyyy'">
+                </td>
+                <td style="text-align: center;">
+                  <input [disabled]="vendu.disabledInput" type="text" name="quantite{{i}}" class="input-field quantite" [(ngModel)]="vendu.quantite" value="vendu.quantite">
+                </td>
+                <td style="text-align: center;">
+                  <input [disabled]="vendu.disabledInput" type="text" name="prixUnitaire{{i}}" class="input-field prxUnitaire" [(ngModel)]="vendu.prixUnitaire" value="vendu.prixUnitaire">
+                </td>
                 <td style="text-align: center;"><label class="label-generique">{{vendu.total}}</label></td>
-                <td style="text-align: center; cursor:pointer;">
+                <td style="text-align: center; cursor:pointer; width: 11%;">
                   <img class="remove" [ngClass]="{'btn-pencil-reomve': vendu.modif===false}" src="../../../assets/remove-icone.png" width="30" height="30" title="supprimer" (click)="supprimer(i, vendu)">
                   <img class="pencil" [ngClass]="{'btn-pencil-reomve': vendu.modif===false}" src="../../../assets/pencil.png" width="25" height="25" title="modifier" (click)="modifier(i, vendu)">
                   <img class="check" [ngClass]="{'btn-check-close': vendu.modif===true}" src="../../../assets/check.png" width="28" height="27" title="valider" (click)="validerLesModif(i, vendu)">
-                  <img class="annuler-modif" [ngClass]="{'btn-check-close': vendu.modif===true}" src="../../../assets/remove-ic.png" width="30" height="30" title="annuler" (click)="annuler(i)">
+                  <img class="annuler-modif" [ngClass]="{'btn-check-close': vendu.modif===true}" src="../../../assets/remove-ic.png" width="30" height="30" title="annuler" (click)="annuler(vendu,i)">
                 </td>
               </tr>
             </tbody>
@@ -79,23 +85,23 @@
               <tr>
                 <td class="libeller">Produit</td>
                 <td>
-                  <select class="input-field" name="produitSelect" id="produitSelect">
-                    <option value="" selected>Choisir le produit </option>
-                    <option *ngFor="let produit of this.sharedService._prduitAll" value="{{produit.id}}">{{produit.libelle}} - {{produit.type}}</option>
+                  <select class="input-field" name="produitSelects" id="produitSelects" [(ngModel)]="vendu.produit">
+                    <option [ngValue]="produit" selected>Choisir le produit </option>
+                    <option *ngFor="let produit of this.sharedService._prduitAll" [ngValue]="produit">{{produit.libelle}} - {{produit.type}}</option>
                   </select> 
                 </td>
               </tr>
               <tr>
                 <td class="libeller">Date vente* :</td>
-                <td><input type="Date" name="dateVente" class="input-field dateVente" [(ngModel)]="vendu.dateVente"></td>
+                <td><input type="Date" name="dateVentes" class="dateVentes input-field" [(ngModel)]="vendu.dateVente" value="vendu.dateVente | date: 'dd/MM/yyyy'"></td>
               </tr>
               <tr>
                 <td class="libeller">Quantite* : </td>
-                <td><input type="text" name="quantite" class="input-field quantite" [(ngModel)]="vendu.quantite"></td>
+                <td><input type="text" name="quantites" class="quantites input-field" [(ngModel)]="vendu.quantite"></td>
               </tr>
               <tr>
                 <td class="libeller">Prix unitaire* :</td>
-                <td><input type="text" name="prixUnitaire" class="input-field prxUnitaire" [(ngModel)]="vendu.prixUnitaire"></td>
+                <td><input type="text" name="prixUnitaires" class="input-field prixUnitaires" [(ngModel)]="vendu.prixUnitaire"></td>
               </tr>
             </table>
           </div>
