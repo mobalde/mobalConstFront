@@ -5,6 +5,24 @@
       <div class="blocPrincipal">
           <form method="post" class="form-horizontal filed-input">
               <div class="form-group">
+                  <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="produit">Motif: </label>
+                  <select class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" name="motifEnum" id="motif" 
+                          [(ngModel)]="banque.motif" style="height: 32px;" (ngChange)="affichageBloc($event)">
+                    <option [ngValue]="banque.motif">Choisissez un motif</option>
+                    <option *ngFor="let key of motifEnum;">{{key}}</option>
+                  </select>
+              </div>
+              <div class="form-group row">
+                <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="produit">Mode d'Opération: </label>
+                <div class="bloc-operation">
+                  <p>
+                    <input class="virement" type="radio" name="operation" style="width:auto;cursor:pointer" title="virement"><span title="virement" style="cursor:pointer"> V</span>
+                    <input class="depot" type="radio" name="operation" style="width:auto;cursor:pointer" title="depôt"><span title="depôt" style="cursor:pointer"> D</span>
+                    <input class="retrait" type="radio" name="operation" style="width:auto;cursor:pointer" title="retrait"><span style="cursor:pointer" title="retrait"> R</span>
+                  </p>
+                </div>
+              </div>
+              <div class="form-group">
                   <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="produit">Produit: </label>
                   <select class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" name="libelle" id="produit" style="height: 32px;" (change)="onChange($event.target.value)">
                     <option value="" selected>Choisir le produit</option>

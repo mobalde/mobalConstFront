@@ -1,3 +1,7 @@
 .contenu{
     text-align: center;
 }
+
+.depot, .retrait{
+    margin-left: 26px;
+}

@@ -8,6 +8,7 @@ import { Produit } from './../produit/models/produit';
 import { Http } from '@angular/http';
 import { SharedService } from './../../shared/shared.service';
 import { Component, OnInit } from '@angular/core';
+import { MotifEnum } from './models/motif-enum';
 
 declare var $: any;
 
@@ -22,8 +23,12 @@ export class BanqueComponent implements OnInit {
   banque: Banque = new Banque();
   soldeAnt: Number;
   venteSemaine: VenduInBanque = new VenduInBanque();
+  motifEnum: any;
+
   constructor(private sharedService: SharedService, private http: Http, private produitService: ProduitsService, 
-              private banqueService: BanqueService, private router: Router) { }
+              private banqueService: BanqueService, private router: Router) {
+                this.motifEnum = Object.values(MotifEnum);
+              }
 
   ngOnInit() {
     this.sharedService.displayHeader('pageBanque');

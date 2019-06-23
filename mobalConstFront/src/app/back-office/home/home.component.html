@@ -1,23 +1,16 @@
 <div class="row content-home">
-  <div class="col-md-2 col-lg-4 col-xl-4"></div>
-  <div class="col-12 col-md-8 col-sm-12 col-lg-4 col-xl-4 bloc-contenu">
+  <div class="col-md-1 col-lg-2 col-xl-2"></div>
+  <div class="col-12 col-md-10 col-sm-12 col-lg-8 col-xl-8 bloc-contenu">
     <h2 class="title">Menu Principal </h2>
-    <div>
-        <fieldset class="blocPrincipal">
-            <div class="bilanCompte">
-                <button type="button" class="btn btn-large btn-successe-bis" (click)="navigation('bilan')">Bilan Compte</button>
-            </div>
-            <div class="banque">
-                <button type="button" class="btn btn-large btn-successe-bis" (click)="navigation('banque')">Gestion Banque</button>
-            </div>
-            <div class="depot">
-                <button type="button" class="btn btn-large btn-successe-bis" (click)="navigation('marchandise')">Gestion Marchandise</button>
-            </div>
-            <div class="produit">
-                <button type="button" class="btn btn-large btn-successe-bis" (click)="navigation('produit')">Gestion Produit</button>
-            </div>
-        </fieldset>
-    </div>
+    <fieldset class="blocPrincipal">
+        <div class="row">
+            <div class="col-12 col-md-4 col-sm-6 col-lg-4 col-xl-4" *ngFor="let libelle of libelleHome | keyvalue">
+                <div class="{{libelle.key}} btn-successe-bis bloc-panel" (click)="navigation(libelle.key)">
+                    <label class="libelle">{{libelle.value}}</label>
+                </div>
+            </div> 
+        </div>
+    </fieldset>
   </div>
-  <div class="col-md-2 col-lg-4 col-xl-4"></div>
+  <div class="col-md-1 col-lg-2 col-xl-2"></div>
 </div>

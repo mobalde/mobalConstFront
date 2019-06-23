@@ -1,3 +1,13 @@
+.bloc-panel{
+    margin-bottom: 1.6rem;
+    text-align: center;
+    border-radius: 7px;
+    padding: 1rem;
+    box-shadow: 2px 5px 2px 0px #1d2124;
+}
+.libelle, .bloc-panel{
+    cursor: pointer;
+}
 @media (min-width: 1200px){
 }
 @media (min-width: 992px){
