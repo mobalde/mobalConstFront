@@ -1,8 +1,8 @@
 export enum MotifEnum {
-    achat_marchandise = "ACHAT_MARCHANDISE", //
-	vente_marchandise = "VENTE_MARCHANDISE", //
-	payement_loyer = "PAYEMEMNT_LOYER", //
-	frais_travaux = "FRAIS_TRAVAUX", //
-	payement_impot = "PAYEMENT_IMPOT", //
-	autre = "AUTRE"
+    achat_marchandise = "Achat marchandise", //
+	vente_marchandise = "Vente marchandise", //
+	payement_loyer = "Payement loyer", //
+	frais_travaux = "Frais travaux", //
+	payement_impot = "Payement impot", //
+	autre = "Autre"
 }

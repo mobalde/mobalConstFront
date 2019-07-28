@@ -7,6 +7,8 @@ export class Banque{
 	total: Number;
 	isDepot: boolean;
 	isRetrait: boolean;
+	isVirement: boolean;
 	soldeAnterieur: Number;
 	motif: String;
+	isTypeOperation: String;
 }

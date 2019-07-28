@@ -7,29 +7,30 @@
               <div class="form-group">
                   <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="produit">Motif: </label>
                   <select class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" name="motifEnum" id="motif" 
-                          [(ngModel)]="banque.motif" style="height: 32px;" (ngChange)="affichageBloc($event)">
-                    <option [ngValue]="banque.motif">Choisissez un motif</option>
-                    <option *ngFor="let key of motifEnum;">{{key}}</option>
+                          [(ngModel)]="banque.motif" style="height: 32px;" (change)="affichageBloc($event.target.value)">
+                    <option [value]="" selected>Choisissez un motif</option>
+                    <option *ngFor="let value of motifEnum;" [value]="value">{{value}}</option>
                   </select>
               </div>
-              <div class="form-group row">
+              <div class="form-group row" >
                 <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="produit">Mode d'Opération: </label>
                 <div class="bloc-operation">
                   <p>
-                    <input class="virement" type="radio" name="operation" style="width:auto;cursor:pointer" title="virement"><span title="virement" style="cursor:pointer"> V</span>
-                    <input class="depot" type="radio" name="operation" style="width:auto;cursor:pointer" title="depôt"><span title="depôt" style="cursor:pointer"> D</span>
-                    <input class="retrait" type="radio" name="operation" style="width:auto;cursor:pointer" title="retrait"><span style="cursor:pointer" title="retrait"> R</span>
+                    <input class="virement" type="radio" name="operation" value="v" [(ngModel)]="banque.isTypeOperation" style="width:auto;cursor:pointer" title="virement"><span title="virement" style="cursor:pointer"> V</span>
+                    <input class="depot" type="radio" name="operation" value="d" [(ngModel)]="banque.isTypeOperation" style="width:auto;cursor:pointer" title="depôt"><span title="depôt" style="cursor:pointer"> D</span>
+                    <input class="retrait" type="radio" name="operation" value="r" [(ngModel)]="banque.isTypeOperation" style="width:auto;cursor:pointer" title="retrait"><span style="cursor:pointer" title="retrait"> R</span>
                   </p>
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group" *ngIf="isMotif">
                   <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="produit">Produit: </label>
                   <select class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" name="libelle" id="produit" style="height: 32px;" (change)="onChange($event.target.value)">
                     <option value="" selected>Choisir le produit</option>
                     <option *ngFor="let produit of this.sharedService._prduitAll" value="{{produit.libelleEnum}}">{{produit.libelle}} - {{produit.type}}</option>
                   </select>
               </div>
-              <div class="form-group" *ngIf="this.venduInBanque.length > 0">
+              <!-- <div class="form-group" *ngIf="this.venduInBanque.length > 0 "> -->
+              <div class="form-group" *ngIf="this.venduInBanque.length > 0 && isMotif">
                 <div class="form-group">
                   <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="semainevente">Semaine de vente: </label>
                   <select class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" name="semaineVente" id="semainevente" style="height: 32px;" (change)="addBanque($event.target.value)">
@@ -38,35 +39,35 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="dateoperation">Date Operation: </label>
-                  <input type="date" name="dateOperation" class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" id="dateoperation" [(ngModel)]="this.banque.dateOperation">
-                </div>
-                <div class="form-group">
                     <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="totalvente">Total vente: </label>
                     <input [disabled]="true" type="text" name="totalVente" class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" id="totalvente" [(ngModel)]="this.venteSemaine.totalVente">
                 </div>
-                <div class="form-group">
-                  <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="somme">Somme deposé: </label>
-                  <input type="text" name="somme" class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" id="somme" [(ngModel)]="this.banque.somme">
-                </div>
-                <div class="form-group">
-                  <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="numeroTicketDepot">Numero ticket de depôt: </label>
-                  <input type="text" name="numeroTicket" class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" id="numeroTicketDepot" [(ngModel)]="this.banque.numeroTicket">
-                </div>
-                <div class="form-row">
-                    <div class="col"></div>
-                    <div class="col"></div>
-                    <div class="col"></div>
-                    <div class="col">
-                        <button type="button" class="btn btn-successe" (click)="openPopin()">Valider</button>
-                    </div>
+            </div>
+            <div class="form-group">
+              <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="dateoperation">Date Operation: </label>
+              <input type="date" name="dateOperation" class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" id="dateoperation" [(ngModel)]="this.banque.dateOperation">
+            </div>
+            <div class="form-group">
+              <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="somme">Somme deposé: </label>
+              <input type="text" name="somme" class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" id="somme" [(ngModel)]="this.banque.somme">
+            </div>
+            <div class="form-group">
+              <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="numeroTicketDepot">Numero ticket / transaction: </label>
+              <input type="text" name="numeroTicket" class="col-7 col-md-7 col-sm-7 col-lg-7 col-xl-7" id="numeroTicketDepot" [(ngModel)]="this.banque.numeroTicket">
+            </div>
+            <div class="form-row">
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col">
+                    <button type="button" class="btn btn-successe" (click)="openPopin()">Valider</button>
                 </div>
             </div>
           </form>
       </div>
       <!-- Alert reponse -->
       <div class="alert alert-success" role="alert" style="display:none;">
-          <strong style="margin-left:25%">Le depot a été ajouté avec succès</strong>
+          <strong style="margin-left:25%">L'opération a été ajouté avec succès</strong>
       </div>
     </div>
     <div class="col-md-3 col-lg-3 col-xl-3"></div>

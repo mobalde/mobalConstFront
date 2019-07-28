@@ -24,6 +24,9 @@ export class BanqueComponent implements OnInit {
   soldeAnt: Number;
   venteSemaine: VenduInBanque = new VenduInBanque();
   motifEnum: any;
+  isMotif: boolean = false;
+
+  motifArray: Array<String> = ['Payement loyer', 'Frais travaux', 'Payement impot', 'Autre'];
 
   constructor(private sharedService: SharedService, private http: Http, private produitService: ProduitsService, 
               private banqueService: BanqueService, private router: Router) {
@@ -67,11 +70,18 @@ export class BanqueComponent implements OnInit {
   }
 
   openPopin(){
+    console.log("_______________ banque: ",this.banque);
     // Verification champs
-    if(!this.venteSemaine.totalVente){
-      $('#semainevente').css('border', '1px solid red');
+    if(this.isMotif){
+      if(!this.venteSemaine.totalVente){
+        $('#semainevente').css('border', '1px solid red');
+      }
+    } 
+    if(!this.banque.isTypeOperation){
+
+      // Faire le traitement
     }
-    else if(!this.banque.dateOperation){
+    if(!this.banque.dateOperation){
       $('#semainevente').css('border', '1px solid #808080ad');
       $('#dateoperation').css('border', '1px solid red');
     }
@@ -90,7 +100,7 @@ export class BanqueComponent implements OnInit {
 
   valider(){
     this.banque.soldeAnterieur = this.soldeAnt;
-    this.banque.motif = 'VENTE_MARCHANDISE';
+    this.banque.motif = this.banque.motif.replace(" ", "_").toUpperCase();
     this.venteSemaine.banqueDto = this.banque;
     this.venteSemaine.depotBanque = true;
     this.banqueService.postVenteSemaine(this.venteSemaine).subscribe(
@@ -105,6 +115,11 @@ export class BanqueComponent implements OnInit {
         $('#popin').modal('toggle');
       }
     );
+  }
+
+  affichageBloc(event){
+    this.isMotif = !this.motifArray.includes(event);
+    console.log("this.motif: ",this.isMotif);
   }
   
 }
