@@ -25,6 +25,7 @@ export class BanqueComponent implements OnInit {
   venteSemaine: VenduInBanque = new VenduInBanque();
   motifEnum: any;
   isMotif: boolean = false;
+  isMotifSelected: boolean = false;
 
   motifArray: Array<String> = ['Payement loyer', 'Frais travaux', 'Payement impot', 'Autre'];
 
@@ -71,30 +72,23 @@ export class BanqueComponent implements OnInit {
 
   openPopin(){
     console.log("_______________ banque: ",this.banque);
-    // Verification champs
-    if(this.isMotif){
-      if(!this.venteSemaine.totalVente){
-        $('#semainevente').css('border', '1px solid red');
-      }
-    } 
+    // Verification champs communs
     if(!this.banque.isTypeOperation){
-
-      // Faire le traitement
-    }
-    if(!this.banque.dateOperation){
-      $('#semainevente').css('border', '1px solid #808080ad');
-      $('#dateoperation').css('border', '1px solid red');
-    }
-    else if(!this.banque.somme){
+      $('.bloc-operation').css({'border': '1px solid red', 'padding': '4px'});
+    } else if(!this.banque.dateOperation){
+      $('.bloc-operation').css('border', '1px solid #fff');
+      $('#dateoperation').css({'border': '1px solid red','padding': '4px'});
+    } else if(!this.banque.somme){
       $('#dateoperation').css('border', '1px solid #808080ad');
-      $('#argentdepose').css('border', '1px solid red');
-    } 
-    else if(!this.banque.numeroTicket){
-      $('#argentdepose').css('border', '1px solid #808080ad');
-      $('#numeroTicketDepot').css('border', '1px solid red');
-    }
-    else {
-      $("#popin").modal("show");
+      $('#somme').css({'border': '1px solid red', 'padding': '4px'});
+    } else {
+      if(this.isMotif && $('#produit').val() === ''){
+          $('#somme').css('border', '1px solid #808080ad');
+          $('#produit').css({'border': '1px solid red', 'padding': '4px'});
+      } else {
+        console.log('____________');
+        $("#popin").modal("show");
+      }
     }
   }
 
@@ -103,23 +97,23 @@ export class BanqueComponent implements OnInit {
     this.banque.motif = this.banque.motif.replace(" ", "_").toUpperCase();
     this.venteSemaine.banqueDto = this.banque;
     this.venteSemaine.depotBanque = true;
-    this.banqueService.postVenteSemaine(this.venteSemaine).subscribe(
-      data => {
-        // setTimeout( () => { 
-        //   location.reload();
-        //  }, 1000 );
-         $('#popin').modal('toggle');
-         this.sharedService.afficheAlerte('alert-success', 'class');
-      },
-      error => {
-        $('#popin').modal('toggle');
-      }
-    );
+    // this.banqueService.postVenteSemaine(this.venteSemaine).subscribe(
+    //   data => {
+    //     // setTimeout( () => { 
+    //     //   location.reload();
+    //     //  }, 1000 );
+    //      $('#popin').modal('toggle');
+    //      this.sharedService.afficheAlerte('alert-success', 'class');
+    //   },
+    //   error => {
+    //     $('#popin').modal('toggle');
+    //   }
+    // );
   }
 
   affichageBloc(event){
     this.isMotif = !this.motifArray.includes(event);
-    console.log("this.motif: ",this.isMotif);
+    this.isMotifSelected = (event !== '' && event !== 'Choisissez un motif') ? true : false;
   }
   
 }
