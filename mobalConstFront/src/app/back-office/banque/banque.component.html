@@ -17,9 +17,9 @@
                   <label class="label-generique aligntextright control-label col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5" for="produit">Mode d'Opération: </label>
                   <div class="bloc-operation">
                     <p>
-                      <input class="virement" type="radio" name="operation" value="v" [(ngModel)]="banque.isTypeOperation" style="width:auto;cursor:pointer" title="virement"><span title="virement" style="cursor:pointer"> V</span>
-                      <input class="depot" type="radio" name="operation" value="d" [(ngModel)]="banque.isTypeOperation" style="width:auto;cursor:pointer" title="depôt"><span title="depôt" style="cursor:pointer"> D</span>
-                      <input class="retrait" type="radio" name="operation" value="r" [(ngModel)]="banque.isTypeOperation" style="width:auto;cursor:pointer" title="retrait"><span style="cursor:pointer" title="retrait"> R</span>
+                      <input class="virement" type="radio" name="operation" value="v" [(ngModel)]="isTypeOperation" title="virement"><span class="span-virement" title="virement"> V</span>
+                      <input *ngIf="isMotif && banque.motif === 'Vente marchandise'" class="depot" type="radio" name="operation" value="d" [(ngModel)]="isTypeOperation" title="depôt"><span class="depot-virement" *ngIf="isMotif && banque.motif === 'Vente marchandise'" title="depôt"> D</span>
+                      <input *ngIf="banque.motif !== 'Vente marchandise'" class="retrait" type="radio" name="operation" value="r" [(ngModel)]="isTypeOperation" title="retrait"><span class="span-retrait" *ngIf="banque.motif !== 'Vente marchandise'" title="retrait"> R</span>
                     </p>
                   </div>
                 </div>
@@ -64,13 +64,12 @@
                         <button type="button" class="btn btn-successe" (click)="openPopin()">Valider</button>
                     </div>
                 </div>
-
               </div>
           </form>
       </div>
       <!-- Alert reponse -->
       <div class="alert alert-success" role="alert" style="display:none;">
-          <strong style="margin-left:25%">L'opération a été ajouté avec succès</strong>
+          <strong style="text-align: center">L'opération a été ajouté avec succès</strong>
       </div>
     </div>
     <div class="col-md-3 col-lg-3 col-xl-3"></div>

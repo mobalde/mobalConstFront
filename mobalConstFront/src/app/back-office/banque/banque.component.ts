@@ -26,6 +26,7 @@ export class BanqueComponent implements OnInit {
   motifEnum: any;
   isMotif: boolean = false;
   isMotifSelected: boolean = false;
+  isTypeOperation: String;
 
   motifArray: Array<String> = ['Payement loyer', 'Frais travaux', 'Payement impot', 'Autre'];
 
@@ -71,9 +72,8 @@ export class BanqueComponent implements OnInit {
   }
 
   openPopin(){
-    console.log("_______________ banque: ",this.banque);
     // Verification champs communs
-    if(!this.banque.isTypeOperation){
+    if(!this.isTypeOperation){
       $('.bloc-operation').css({'border': '1px solid red', 'padding': '4px'});
     } else if(!this.banque.dateOperation){
       $('.bloc-operation').css('border', '1px solid #fff');
@@ -85,8 +85,10 @@ export class BanqueComponent implements OnInit {
       if(this.isMotif && $('#produit').val() === ''){
           $('#somme').css('border', '1px solid #808080ad');
           $('#produit').css({'border': '1px solid red', 'padding': '4px'});
-      } else {
-        console.log('____________');
+      } else if(this.banque.motif === 'Vente marchandise' && this.banque.soldeAnterieur === undefined) {
+        alert('Aucune vente enregistrer pour ce produit');
+      }
+      else {
         $("#popin").modal("show");
       }
     }
@@ -95,20 +97,23 @@ export class BanqueComponent implements OnInit {
   valider(){
     this.banque.soldeAnterieur = this.soldeAnt;
     this.banque.motif = this.banque.motif.replace(" ", "_").toUpperCase();
+    this.banque.virement = this.isTypeOperation === 'v' ? true : false;
+    this.banque.retrait = this.isTypeOperation === 'r' ? true : false;
+    this.banque.depot = this.isTypeOperation === 'd' ? true : false;
     this.venteSemaine.banqueDto = this.banque;
     this.venteSemaine.depotBanque = true;
-    // this.banqueService.postVenteSemaine(this.venteSemaine).subscribe(
-    //   data => {
-    //     // setTimeout( () => { 
-    //     //   location.reload();
-    //     //  }, 1000 );
-    //      $('#popin').modal('toggle');
-    //      this.sharedService.afficheAlerte('alert-success', 'class');
-    //   },
-    //   error => {
-    //     $('#popin').modal('toggle');
-    //   }
-    // );
+    this.banqueService.postVenteSemaine(this.venteSemaine).subscribe(
+      data => {
+        setTimeout( () => { 
+          this.isMotifSelected = false;
+         }, 300 );
+         $('#popin').modal('toggle');
+         this.sharedService.afficheAlerte('alert-success', 'class');
+      },
+      error => {
+        $('#popin').modal('toggle');
+      }
+    );
   }
 
   affichageBloc(event){

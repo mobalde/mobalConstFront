@@ -5,10 +5,9 @@ export class Banque{
 	numeroTicket: String;
 	somme: Number;
 	total: Number;
-	isDepot: boolean;
-	isRetrait: boolean;
-	isVirement: boolean;
+	depot: boolean;
+	retrait: boolean;
+	virement: boolean;
 	soldeAnterieur: Number;
 	motif: String;
-	isTypeOperation: String;
 }

@@ -5,3 +5,8 @@
 .depot, .retrait{
     margin-left: 26px;
 }
+
+.depot, .retrait, .virement, .span-depot, .span-retrait, .span-virement{
+    width:auto;
+    cursor:pointer;
+}
