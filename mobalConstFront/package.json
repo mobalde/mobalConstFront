@@ -25,7 +25,7 @@
     "@ngx-pwa/local-storage": "~7.4.2",
     "bootstrap": "~4.1.1",
     "core-js": "~2.5.4",
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "materialize-css": "~1.0.0",
     "ngx-bootstrap": "~3.0.0",
     "popper.js": "~1.14.3",
